@@ -4,6 +4,7 @@ export const router = createBrowserRouter([
   {
     path: '/',
     element: <Outlet />,
+    errorElement: <h1>404 Not Found</h1>,
     children: [
       {
         index: true,
@@ -23,7 +24,22 @@ export const router = createBrowserRouter([
       },
       {
         path: '/admin',
-        element: <h1>Admin</h1>,
+        element: (
+          <>
+            <h1>Admin</h1>
+            <Outlet />
+          </>
+        ),
+        children: [
+          {
+            path: '/admin/create',
+            element: <h2>Create Booking</h2>,
+          },
+          {
+            path: '/admin/:bookingId',
+            element: <h2>Edit Booking</h2>,
+          },
+        ],
       },
     ],
   },
