@@ -1,4 +1,4 @@
-export default Footer = () => {
+const Footer = () => {
   return (
     <footer>
       <p>&copy; 2024 SatoSushi. All rights reserved.</p>
@@ -6,3 +6,5 @@ export default Footer = () => {
     </footer>
   );
 };
+
+export default Footer;
