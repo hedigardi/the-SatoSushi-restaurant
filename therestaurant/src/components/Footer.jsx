@@ -1,12 +1,11 @@
+import { Link } from 'react-router-dom';
+
 const Footer = () => {
   return (
     <footer>
       <ul>
         <li>
-          <a href="/about">Terms and Conditions</a>
-        </li>
-        <li>
-          <a href="/HomePage">© SatoSuShi 2024</a>
+          <Link to={'/about'}>Terms and Conditions</Link>
         </li>
       </ul>
 

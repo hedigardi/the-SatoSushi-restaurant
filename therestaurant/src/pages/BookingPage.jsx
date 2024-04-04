@@ -1,7 +1,7 @@
 export default function BookingPage() {
   return (
     <section>
-      <h1>Boka Tid</h1>
+      <h2>Boka Tid</h2>
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -79,7 +79,7 @@ export default function BookingPage() {
           </span>
         </div>
 
-        <button>Boka Tid</button>
+        <button>Boka</button>
       </form>
     </section>
   );
