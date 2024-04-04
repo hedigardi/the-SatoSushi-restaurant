@@ -25,7 +25,7 @@ export default function HomePage() {
         <nav>
           <ul>
             <li>
-              <a href="/menu">Menu</a>
+              <a href="/menupage">Menu</a>
             </li>
             <li>
               <a href="/book">Book</a>

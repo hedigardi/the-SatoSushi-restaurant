@@ -1,98 +1,148 @@
 // Render the main page of a Sushi restaurant
 
 export default function HomePage() {
-    return (
-      <>
-        {" "}
-        <div className="hat">
-          <a href="/">
-            <img
-              className="logo"
-              src="src/assets/images/logo_blackbg_noBG.png"
-              alt="SatoSuShi logo"
-            />
-          </a>
-          <h1 className="title">SatoSuShi</h1>
-          <nav>
-            <ul className="menu">
-              <li>
-                <a href="/menu">≠</a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-        <header>
-          <nav>
-            <ul>
-              <li>
-                <a href="/menu">Menu</a>
-              </li>
-              <li>
-                <a href="/book">Book</a>
-              </li>
-              <li>
-                <a href="/contact">Contact</a>
-              </li>
-              <li>
-                <a href="/about">About</a>
-              </li>
-            </ul>
-          </nav>
-        </header>
-        <div className="columns">
-          <div className="column">
-            <p className="subtitle">Sushi Restaurant since 2008</p>
-            <div className="card">
-              <div className="card-content">
-                <div className="content">
-                  <div className="hero is-medium is-primary is-bold">
-                    <div className="hero-body">
-                      <h2>Sushi</h2>
-                      <p className="about_us">
-                        Savor the exquisite taste of traditional Japanese cuisine
-                        at SatoSuShi. Our master chefs artfully prepare each dish
-                        to perfection, combining fresh ingredients with
-                        centuries-old culinary techniques. 
-                      </p>
-                      <p className="about_us">
-                      Immerse yourself in the
-                        rich flavors of sushi, sashimi, and other Japanese
-                        delicacies as you embark on a culinary journey like no
-                        other.
-                      </p>
-                      <p className="about_us">
-                        Experience the essence of Japan right here at SatoSuShi.
-                      </p>
-  
-                      {/* <img
-                        className="sushiHero hero"
-                        src="src/assets/images/sushiHero.jpg"
-                        alt="sushiHero image"
-                      /> */}
-                    </div>
+  return (
+    <>
+      {" "}
+      <div className="hat">
+        <a href="/">
+          <img
+            className="logo"
+            src="src/assets/images/logo_blackbg_noBG.png"
+            alt="SatoSuShi logo"
+          />
+        </a>
+        <h1 className="title">SatoSuShi</h1>
+        <nav>
+          <ul className="menu">
+            <li>
+              <a href="/menu">≠</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <header>
+        <nav>
+          <ul>
+            <li>
+              <a href="/menu">Meny</a>
+            </li>
+            <li>
+              <a href="/book">Boka bord</a>
+            </li>
+            <li>
+              <a href="/contact">Kontakt</a>
+            </li>
+            <li>
+              <a href="/about">Om oss</a>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      <div className="columns">
+        <div className="column">
+          <p className="subtitle">Sushi Restaurang sedan 2008</p>
+          <div className="card">
+            <div className="card-content">
+              <div className="content">
+                <h2>Menu</h2>
+                <div class="menu-category">
+                  <h3>Maki</h3>
+                  <div class="menu-card">
+                    <img
+                      className="dish-image"
+                      src="./src/assets/images/dishes/ikura_salmon_maki.jpg"
+                      alt="Sushi rätt"
+                    />
+                    <h3 class="dish-title">Ikura (lax) maki</h3>
+                    <p class="dish-price">199 kr</p>
+                  </div>
+                  <div class="menu-card">
+                    <img
+                      className="dish-image"
+                      src="./src/assets/images/dishes/ikura_salmon_maki.jpg"
+                      alt="Sushi rätt"
+                    />
+                    <h3 class="dish-title">Ikura (lax) maki</h3>
+                    <p class="dish-price">199 kr</p>
+                  </div>
+                  <div class="menu-card">
+                    <img
+                      className="dish-image"
+                      src="./src/assets/images/dishes/ikura_salmon_maki.jpg"
+                      alt="Sushi rätt"
+                    />
+                    <h3 class="dish-title">Ikura (lax) maki</h3>
+                    <p class="dish-price">199 kr</p>
+                  </div>
+                  <div class="menu-card">
+                    <img
+                      className="dish-image"
+                      src="./src/assets/images/dishes/ikura_salmon_maki.jpg"
+                      alt="Sushi rätt"
+                    />
+                    <h3 class="dish-title">Ikura (lax) maki</h3>
+                    <p class="dish-price">199 kr</p>
                   </div>
                 </div>
-                <div className="content">
-                  <p>
-                    Welcome to SatoSuShi, your number one source for all things
-                    sushi.
-                  </p>
+                <div class="menu-category">
+                  <h3>Nigiri</h3>
+                  <div class="menu-card">
+                    <img
+                      className="dish-image"
+                      src="./src/assets/images/dishes/nigiri_with_salmon.jpg"
+                      alt="Sushi rätt"
+                    />
+                    <h3 class="dish-title">Lax nigiri</h3>
+                    <p class="dish-price">199 kr</p>
+                  </div>
+                  <div class="menu-card">
+                    <img
+                      className="dish-image"
+                      src="./src/assets/images/dishes/nigiri_with_shrimp.jpg"
+                      alt="Sushi rätt"
+                    />
+                    <h3 class="dish-title">Räka nigiri</h3>
+                    <p class="dish-price">199 kr</p>
+                  </div>
+                  <div class="menu-card">
+                    <img
+                      className="dish-image"
+                      src="./src/assets/images/dishes/nigiri_with_tuna.jpg"
+                      alt="Sushi rätt"
+                    />
+                    <h3 class="dish-title">Tonfisk nigiri</h3>
+                    <p class="dish-price">1999 kr</p>
+                  </div>
+                  <div class="menu-card">
+                    <img
+                      className="dish-image"
+                      src="./src/assets/images/dishes/nigiri_with_salmon.jpg"
+                      alt="Sushi rätt"
+                    />
+                    <h3 class="dish-title">Lakrits nigiri</h3>
+                    <p class="dish-price">19 kr</p>
+                  </div>
                 </div>
+              </div>
+              <div className="content">
+                <p>
+                Välkommen till SatoSuShi, din främsta källa för allt som rör sushi.                </p>
               </div>
             </div>
           </div>
         </div>
-        <footer>
-          <ul>
-            <li>
-              <a href="/about">Terms and Conditions</a>
-            </li>
-            <li>
-              <a href="/HomePage">© SatoSuShi 2024</a>
-            </li>
-          </ul>
-        </footer>
-      </>
-    );
-  }
-  
+      </div>
+      <footer>
+        <ul>
+          <li>
+            <a href="/about">Villkor</a>
+          </li>
+          <li>
+            <a href="/HomePage">© SatoSuShi 2024</a>
+          </li>
+        </ul>
+      </footer>
+    </>
+  );
+}
