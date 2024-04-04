@@ -1,8 +1,18 @@
+import { Link } from 'react-router-dom';
+
 const Footer = () => {
   return (
     <footer>
-      <p>&copy; 2024 SatoSushi. All rights reserved.</p>
-      <p>Contact us at info@satosushi.com</p>
+      <ul>
+        <li>
+          <Link to={'/about'}>Terms and Conditions</Link>
+        </li>
+      </ul>
+
+      <div>
+        <p>&copy; 2024 SatoSushi. All rights reserved.</p>
+        <p>Contact us at info@satosushi.com</p>
+      </div>
     </footer>
   );
 };
