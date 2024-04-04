@@ -1,6 +1,6 @@
 import { Outlet, createBrowserRouter } from 'react-router-dom';
 
-// TODO: Ändra placeholder elementen med the korekta komponenterna.
+// TODO: Ändra "placeholder" elementen med de korrekta komponenterna.
 export const router = createBrowserRouter([
   {
     path: '/',
