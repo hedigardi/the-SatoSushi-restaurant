@@ -45,16 +45,6 @@ export default function HomePage() {
           </div>
         </div>
       </div>
-      <footer>
-        <ul>
-          <li>
-            <a href="/about">Terms and Conditions</a>
-          </li>
-          <li>
-            <a href="/HomePage">© SatoSuShi 2024</a>
-          </li>
-        </ul>
-      </footer>
     </>
   );
 }
