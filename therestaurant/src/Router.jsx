@@ -1,4 +1,5 @@
 import { Outlet, createBrowserRouter } from 'react-router-dom';
+import HomePage from './pages/HomePage';
 
 // TODO: Ändra "placeholder" elementen med de korrekta komponenterna.
 export const router = createBrowserRouter([
@@ -9,7 +10,7 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <h1>Home/About Us</h1>,
+        element: <HomePage />,
       },
       {
         path: '/menu',
