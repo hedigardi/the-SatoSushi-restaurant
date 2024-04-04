@@ -1,5 +1,6 @@
 import { Outlet, createBrowserRouter } from 'react-router-dom';
 import HomePage from './pages/HomePage';
+import MenuPage from './pages/MenuPage';
 import BookingPage from './pages/BookingPage';
 import BaseLayout from './pages/BaseLayout';
 
@@ -15,8 +16,8 @@ export const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: '/menu',
-        element: <h1>Menu</h1>,
+        path: '/menupage',
+        element: <MenuPage />,
       },
       {
         path: '/booking',
