@@ -25,6 +25,10 @@ const ContactPage = () => {
           <button type="submit">Send</button>
         </form>
       </section>
+      <section>
+        <h2>FAQ</h2>
+        <p>Here you can find frequently asked questions.</p>
+      </section>
     </div>
   );
 };
