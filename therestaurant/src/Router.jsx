@@ -1,15 +1,18 @@
 import { Outlet, createBrowserRouter } from 'react-router-dom';
-import MenuPage from './pages/MenuPage';
-// TODO: Ändra placeholder elementen med the korekta komponenterna.
+import HomePage from './pages/HomePage';
+import BookingPage from './pages/BookingPage';
+import BaseLayout from './pages/BaseLayout';
+
+// TODO: Ändra "placeholder" elementen med de korrekta komponenterna.
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <Outlet />,
+    element: <BaseLayout />,
     errorElement: <h1>404 Not Found</h1>,
     children: [
       {
         index: true,
-        element: <h1>Home/About Us</h1>,
+        element: <HomePage />,
       },
       {
         path: '/menupage',
@@ -17,7 +20,7 @@ export const router = createBrowserRouter([
       },
       {
         path: '/booking',
-        element: <h1>Booking</h1>,
+        element: <BookingPage />,
       },
       {
         path: '/contact',
