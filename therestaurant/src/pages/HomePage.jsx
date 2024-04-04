@@ -14,32 +14,19 @@ export default function HomePage() {
                   <div className="hero-body">
                     <h2>Sushi</h2>
                     <p className="about_us">
-                      Savor the exquisite taste of traditional Japanese cuisine
-                      at SatoSuShi. Our master chefs artfully prepare each dish
-                      to perfection, combining fresh ingredients with
-                      centuries-old culinary techniques.
+                    Njut av den utsökta smaken av traditionell japansk mat på SatoSuShi. Våra mästerkockar tillagar konstfullt varje rätt till perfektion, och kombinerar färska ingredienser med hundraåriga kulinariska tekniker.
                     </p>
                     <p className="about_us">
-                      Immerse yourself in the rich flavors of sushi, sashimi,
-                      and other Japanese delicacies as you embark on a culinary
-                      journey like no other.
+                    Fördjupa dig i de rika smakerna av sushi, sashimi och andra japanska delikatesser när du ger dig ut på en kulinarisk resa som ingen annan.
                     </p>
                     <p className="about_us">
-                      Experience the essence of Japan right here at SatoSuShi.
-                    </p>
-
-                    {/* <img
-                      className="sushiHero hero"
-                      src="src/assets/images/sushiHero.jpg"
-                      alt="sushiHero image"
-                    /> */}
+                    Upplev essensen av Japan här på SatoSuShi.                    </p>
                   </div>
                 </div>
               </div>
               <div className="content">
                 <p>
-                  Welcome to SatoSuShi, your number one source for all things
-                  sushi.
+                Välkommen till SatoSuShi, din främsta källa för allt som rör sushi.
                 </p>
               </div>
             </div>
