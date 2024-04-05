@@ -1,4 +1,4 @@
-export default function BookingPage() {
+const BookingPage = () => {
   return (
     <section>
       <h2>Boka Tid</h2>
@@ -83,4 +83,6 @@ export default function BookingPage() {
       </form>
     </section>
   );
-}
+};
+
+export default BookingPage;

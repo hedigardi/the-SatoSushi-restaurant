@@ -5,7 +5,7 @@ const Footer = () => {
     <footer>
       <ul>
         <li>
-          <Link to={'/about'}>Terms and Conditions</Link>
+          <Link to={'/about'}>Villkor och Avtal</Link>
         </li>
       </ul>
 

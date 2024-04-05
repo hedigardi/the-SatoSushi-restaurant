@@ -11,6 +11,8 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --prime-color: salmon;
 }
 
 a {
@@ -36,6 +38,7 @@ h1 {
 }
 
 button {
+  --transition-time: 0.5s;
   border-radius: 8px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
@@ -44,9 +47,10 @@ button {
   font-family: inherit;
   background-color: #1a1a1a;
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: border-color var(--transition-time), color var(--transition-time);
 }
 button:hover {
+  color: #646cff;
   border-color: #646cff;
 }
 button:focus,

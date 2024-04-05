@@ -1,10 +1,11 @@
-import { Outlet, createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import MenuPage from './pages/MenuPage';
+import ContactPage from './pages/ContactPage';
 import BookingPage from './pages/BookingPage';
 import BaseLayout from './pages/BaseLayout';
+// import AdminPage from './pages/AdminPage';
 
-// TODO: Ändra "placeholder" elementen med de korrekta komponenterna.
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -16,7 +17,7 @@ export const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: '/menupage',
+        path: '/menu',
         element: <MenuPage />,
       },
       {
@@ -25,16 +26,11 @@ export const router = createBrowserRouter([
       },
       {
         path: '/contact',
-        element: <h1>Contact</h1>,
+        element: <ContactPage />,
       },
       {
         path: '/admin',
-        element: (
-          <>
-            <h1>Admin</h1>
-            <Outlet />
-          </>
-        ),
+        element: <></>,
         children: [
           {
             path: '/admin/create',

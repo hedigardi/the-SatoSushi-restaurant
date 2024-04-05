@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { getBookings, deleteBooking, updateBooking, createBooking } from '../services/bookingService';
+/* import { useState, useEffect } from 'react';
+import {
+  getBookings,
+  deleteBooking,
+  updateBooking,
+  createBooking,
+} from '../services/bookingService';
 import BookingForm from '../components/BookingForm';
 import BookingList from '../components/BookingList';
 
 const AdminPage = () => {
   const [bookings, setBookings] = useState([]);
   const [selectedBooking, setSelectedBooking] = useState(null);
-
-  useEffect(() => {
-    // Hämtar alla aktiva bokningar när komponenten mountas
-    fetchBookings();
-  }, []);
 
   const fetchBookings = async () => {
     try {
@@ -20,6 +20,10 @@ const AdminPage = () => {
       console.error('Error fetching bookings:', error);
     }
   };
+
+  useEffect(() => {
+    fetchBookings();
+  }, []);
 
   const handleEditBooking = (booking) => {
     setSelectedBooking(booking);
@@ -57,12 +61,20 @@ const AdminPage = () => {
     <div>
       <h2>Admin Page</h2>
       <Link to="/CreateBooking">Create New Booking</Link>
-      <BookingList bookings={bookings} handleEditBooking={handleEditBooking} handleDeleteBooking={handleDeleteBooking} />
+      <BookingList
+        bookings={bookings}
+        handleEditBooking={handleEditBooking}
+        handleDeleteBooking={handleDeleteBooking}
+      />
       {selectedBooking && (
-        <BookingForm booking={selectedBooking} handleSaveBooking={handleSaveBooking} />
+        <BookingForm
+          booking={selectedBooking}
+          handleSaveBooking={handleSaveBooking}
+        />
       )}
     </div>
   );
 };
 
 export default AdminPage;
+ */
