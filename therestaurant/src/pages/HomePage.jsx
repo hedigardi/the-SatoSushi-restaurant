@@ -1,7 +1,7 @@
-import '../App.css'
+// import '../App.css';
 // Render the main page of a Sushi restaurant
 
-export default function HomePage() {
+const HomePage = () => {
   return (
     <>
       <div className="columns">
@@ -14,19 +14,26 @@ export default function HomePage() {
                   <div className="hero-body">
                     <h2>Sushi</h2>
                     <p className="about_us">
-                    Njut av den utsökta smaken av traditionell japansk mat på SatoSuShi. Våra mästerkockar tillagar konstfullt varje rätt till perfektion, och kombinerar färska ingredienser med hundraåriga kulinariska tekniker.
+                      Njut av den utsökta smaken av traditionell japansk mat på
+                      SatoSuShi. Våra mästerkockar tillagar konstfullt varje
+                      rätt till perfektion, och kombinerar färska ingredienser
+                      med hundraåriga kulinariska tekniker.
                     </p>
                     <p className="about_us">
-                    Fördjupa dig i de rika smakerna av sushi, sashimi och andra japanska delikatesser när du ger dig ut på en kulinarisk resa som ingen annan.
+                      Fördjupa dig i de rika smakerna av sushi, sashimi och
+                      andra japanska delikatesser när du ger dig ut på en
+                      kulinarisk resa som ingen annan.
                     </p>
                     <p className="about_us">
-                    Upplev essensen av Japan här på SatoSuShi.                    </p>
+                      Upplev essensen av Japan här på SatoSuShi.{' '}
+                    </p>
                   </div>
                 </div>
               </div>
               <div className="content">
                 <p>
-                Välkommen till SatoSuShi, din främsta källa för allt som rör sushi.
+                  Välkommen till SatoSuShi, din främsta källa för allt som rör
+                  sushi.
                 </p>
               </div>
             </div>
@@ -35,4 +42,6 @@ export default function HomePage() {
       </div>
     </>
   );
-}
+};
+
+export default HomePage;

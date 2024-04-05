@@ -1,5 +1,5 @@
-import { ethers } from "ethers";
-import { abi, contractAddress } from "../config";
+/* import { ethers } from 'ethers';
+import { abi, contractAddress } from '../config';
 
 let provider;
 let readContract;
@@ -12,7 +12,7 @@ if (window.ethereum) {
   writeContract = new ethers.Contract(contractAddress, abi, signer);
 } else {
   console.error(
-    "Ethers.js: Web3 provider not found. Please install a wallet with Web3 support."
+    'Ethers.js: Web3 provider not found. Please install a wallet with Web3 support.'
   );
 }
 
@@ -27,7 +27,10 @@ export const deleteBooking = async (id) => {
 };
 
 export const updateBooking = async (updatedBooking) => {
-  await axios.put(`...här läggs in adressen till API:t.../${updatedBooking.id}`, updatedBooking);
+  await axios.put(
+    `...här läggs in adressen till API:t.../${updatedBooking.id}`,
+    updatedBooking
+  );
   console.log('Updating booking:', updatedBooking);
 };
 
@@ -35,4 +38,4 @@ export const createBooking = async (newBooking) => {
   await axios.post('...här läggs in adressen till API:t...', newBooking);
   console.log('Creating new booking:', newBooking);
 };
-
+ */

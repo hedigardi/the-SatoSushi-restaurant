@@ -18,7 +18,7 @@ const Header = () => {
         <nav>
           <ul>
             <li>
-              <NavLink to={'/'}>Hem</NavLink>
+              <NavLink to={'/'}>Om oss</NavLink>
             </li>
 
             <li>
@@ -26,15 +26,15 @@ const Header = () => {
             </li>
 
             <li>
-              <NavLink to={'/booking'}>Boka Tid</NavLink>
+              <NavLink to={'/booking'}>Boka bord</NavLink>
             </li>
 
             <li>
-              <NavLink to={'/contact'}>Kontakta Oss</NavLink>
+              <NavLink to={'/contact'}>Kontakt</NavLink>
             </li>
 
             <li>
-              <NavLink to={'/admin'}>Personal Portal</NavLink>
+              <NavLink to={'/admin'}>Admin</NavLink>
             </li>
           </ul>
         </nav>
