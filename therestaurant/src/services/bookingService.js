@@ -59,10 +59,15 @@ export const deleteBooking = async (id) => {
 
 };
 
-export const updateBooking = async (updatedBooking) => {
-  await axios.put(
-    `...här läggs in adressen till API:t.../${updatedBooking.id}`,
-    updatedBooking
-  );
-  console.log('Updating booking:', updatedBooking);
+export const updateBooking = async (id) => {
+  return await writeContract.editBooking(
+    id,
+    5,
+    JSON.stringify({
+      name: 'Rowel',
+      email: 'rowel@gmail.com',
+      tel: '07012345678',
+    }),
+    '2024-04-05',
+    21);
 };
