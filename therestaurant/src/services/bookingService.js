@@ -1,6 +1,5 @@
 import { ethers } from 'ethers';
 import { abi, contractAddress } from '../utils/config';
-import axios from 'axios';
 
 let provider;
 let readContract;
@@ -16,6 +15,15 @@ if (window.ethereum) {
     'Ethers.js: Web3 provider not found. Please install a wallet with Web3 support.'
   );
 }
+
+export const createRestaurant = async (name) => {
+  const currentRestaurant = await readContract['restaurants'](1);
+  // console.log(await currentRestaurant.id);
+  if (Number(currentRestaurant.id) === 0)  {
+   await writeContract.createRestaurant(name);
+} else {
+  console.log('Restaurant already exists');
+}}
 
 export const getBookings = async () => {
   const count = await readContract['bookingCount']();
@@ -44,8 +52,9 @@ export const createBooking = async (newBooking) => {
 };
 
 export const deleteBooking = async (id) => {
-  await axios.delete(`...här läggs in adressen till API:t.../${id}`);
-  console.log(`Deleting booking with id ${id}`);
+
+  await writeContract.removeBooking(id);
+
 };
 
 export const updateBooking = async (updatedBooking) => {
