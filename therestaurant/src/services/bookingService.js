@@ -4,6 +4,7 @@ import { abi, contractAddress } from '../utils/config';
 let provider;
 let readContract;
 let writeContract;
+let restaurantId = 0;
 
 if (window.ethereum) {
   provider = new ethers.BrowserProvider(window.ethereum);
@@ -18,8 +19,9 @@ if (window.ethereum) {
 
 export const createRestaurant = async (name) => {
   const currentRestaurant = await readContract['restaurants'](1);
+  restaurantId = Number(currentRestaurant.id);
   // console.log(await currentRestaurant.id);
-  if (Number(currentRestaurant.id) === 0)  {
+  if (restaurantId === 0)  {
    await writeContract.createRestaurant(name);
 } else {
   console.log('Restaurant already exists');
@@ -47,7 +49,7 @@ export const createBooking = async (newBooking) => {
     }),
     '2024-04-05',
     18,
-    2
+    restaurantId
   );
 };
 
