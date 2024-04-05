@@ -1,9 +1,7 @@
-// Get today's date
 const today = new Date();
-const dayOfWeek = today.getDay();
 
 const startOfCurrentWeek = new Date(today);
-startOfCurrentWeek.setDate(today.getDate() - dayOfWeek);
+startOfCurrentWeek.setDate(0);
 
 const startOfNextWeek = new Date(startOfCurrentWeek);
 startOfNextWeek.setDate(startOfCurrentWeek.getDate() + 7);
