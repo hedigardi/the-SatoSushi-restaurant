@@ -41,14 +41,12 @@ export const getBookings = async () => {
 
 export const createBooking = async (newBooking) => {
   return await writeContract.createBooking(
-    3,
-    JSON.stringify({
-      name: 'Antonio Lingårdsson Luna',
-      email: 'toni.lingardsson@gmail.com',
-      tel: '07012345678',
-    }),
-    '2024-04-05',
-    18,
+    newBooking.numberOfGuests,
+    JSON.stringify(
+      newBooking.name
+    ),
+    newBooking.date,
+    newBooking.time,
     restaurantId
   );
 };
@@ -59,15 +57,11 @@ export const deleteBooking = async (id) => {
 
 };
 
-export const updateBooking = async (id) => {
+export const updateBooking = async (id, updateBooking) => {
   return await writeContract.editBooking(
     id,
-    5,
-    JSON.stringify({
-      name: 'Rowel',
-      email: 'rowel@gmail.com',
-      tel: '07012345678',
-    }),
-    '2024-04-05',
-    21);
+    updateBooking.numberOfGuests,
+    JSON.stringify(updateBooking.name),
+    updateBooking.date,
+    updateBooking.time);
 };
