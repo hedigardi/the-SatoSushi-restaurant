@@ -1,5 +1,6 @@
-/* import { ethers } from 'ethers';
-import { abi, contractAddress } from '../config';
+import { ethers } from 'ethers';
+import { abi, contractAddress } from '../utils/config';
+import axios from 'axios';
 
 let provider;
 let readContract;
@@ -17,8 +18,20 @@ if (window.ethereum) {
 }
 
 export const getBookings = async () => {
-  const response = await axios.get('...här läggs in adressen till API:t...');
-  return response.data;
+  const count = await readContract['bookingCount']();
+  const temp = [];
+
+  for (let i = 0; i <= Number(count); ++i) {
+    const booking = await readContract['bookings'](i);
+    if (booking.id > 0) temp.push(booking);
+  }
+
+  return temp;
+};
+
+export const createBooking = async (newBooking) => {
+  await axios.post('...här läggs in adressen till API:t...', newBooking);
+  console.log('Creating new booking:', newBooking);
 };
 
 export const deleteBooking = async (id) => {
@@ -33,9 +46,3 @@ export const updateBooking = async (updatedBooking) => {
   );
   console.log('Updating booking:', updatedBooking);
 };
-
-export const createBooking = async (newBooking) => {
-  await axios.post('...här läggs in adressen till API:t...', newBooking);
-  console.log('Creating new booking:', newBooking);
-};
- */

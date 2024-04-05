@@ -1,9 +1,16 @@
 // import '../App.css';
 // Render the main page of a Sushi restaurant
 
+import { getBookings } from '../services/bookingService';
+
 const HomePage = () => {
+  const AX = async () => {
+    console.log(await getBookings());
+  };
+
   return (
     <>
+      <button onClick={AX}>HEJ</button>
       <div className="columns">
         <div className="column">
           <p className="subtitle">Sushi Restaurang sedan 2008</p>
