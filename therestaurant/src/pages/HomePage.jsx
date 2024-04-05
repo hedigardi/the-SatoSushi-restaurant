@@ -1,11 +1,14 @@
 // import '../App.css';
 // Render the main page of a Sushi restaurant
 
-import { getBookings } from '../services/bookingService';
+import { createBooking, getBookings } from '../services/bookingService';
 
 const HomePage = () => {
   const AX = async () => {
-    console.log(await getBookings());
+    // await createBooking();
+    const list = await getBookings();
+    console.log(list);
+    console.log(JSON.parse(list[4].name).email);
   };
 
   return (

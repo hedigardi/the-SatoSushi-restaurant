@@ -30,8 +30,17 @@ export const getBookings = async () => {
 };
 
 export const createBooking = async (newBooking) => {
-  await axios.post('...här läggs in adressen till API:t...', newBooking);
-  console.log('Creating new booking:', newBooking);
+  return await writeContract.createBooking(
+    3,
+    JSON.stringify({
+      name: 'Antonio Lingårdsson Luna',
+      email: 'toni.lingardsson@gmail.com',
+      tel: '07012345678',
+    }),
+    '2024-04-05',
+    18,
+    2
+  );
 };
 
 export const deleteBooking = async (id) => {
