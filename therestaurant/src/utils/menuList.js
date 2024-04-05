@@ -88,28 +88,28 @@ const menuList = [
     categoryName: 'Drickesmeny',
     menuItems: [
       {
-        dishImg: './src/assets/images/dishes/nigiri_with_salmon.jpg',
+        dishImg: './src/assets/images/drinks/sake.jpg',
         dishTitle: 'Sake',
         dishDescription: 'sake',
         dishPrice: 199,
       },
 
       {
-        dishImg: './src/assets/images/dishes/nigiri_with_tuna.jpg',
+        dishImg: './src/assets/images/drinks/lime_tea.jpg',
         dishTitle: 'Lime Tea',
         dishDescription: 'Lime, sugar',
         dishPrice: 249,
       },
 
       {
-        dishImg: './src/assets/images/dishes/nigiri_with_shrimp.jpg',
+        dishImg: './src/assets/images/drinks/grapefruit_cocktail.jpg',
         dishTitle: 'Grapefruit Cocktail',
         dishDescription: 'grapefruit, sugar',
         dishPrice: 199,
       },
 
       {
-        dishImg: './src/assets/images/dishes/nigiri_with_salmon.jpg',
+        dishImg: './src/assets/images/drinks/chocklad_shake.jpg',
         dishTitle: 'Chocklad Shake',
         dishDescription: 'chocklad, mjölk, socker',
         dishPrice: 249,
