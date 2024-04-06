@@ -9,6 +9,7 @@ import AdminOverviewPage from './pages/AdminOverviewPage';
 import AdminEditPage from './pages/AdminEditPage';
 import CreateBooking from './pages/CreateBooking';
 
+
 export const router = createBrowserRouter([
   {
     path: '/',

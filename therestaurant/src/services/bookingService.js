@@ -66,3 +66,4 @@ export const updateBooking = async (id, updateBooking) => {
     updateBooking.time
   );
 };
+
