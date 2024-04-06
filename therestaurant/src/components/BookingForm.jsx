@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import bookableDates from '../utils/bookableDates';
+import { useLocation } from 'react-router-dom';
+import Gdpr from './Gdpr';
 
 const BookingForm = ({ booking, handleSaveBooking }) => {
   const [formData, setFormData] = useState(
@@ -22,6 +24,8 @@ const BookingForm = ({ booking, handleSaveBooking }) => {
     e.preventDefault();
     handleSaveBooking(formData);
   };
+
+  console.log(useLocation());
 
   return (
     <form
@@ -121,15 +125,9 @@ const BookingForm = ({ booking, handleSaveBooking }) => {
         </label>
       </div>
 
-      <div>
-        <span>
-          <input type="checkbox" /> Jag har läst och samtycker till GDPR och
-          samtliga villkor.{' '}
-          <a href="">Tryck här för att få mer information om GDPR.</a>
-        </span>
-      </div>
+      {useLocation().pathname === '/booking' && <Gdpr />}
 
-      <button>Boka</button>
+      {booking ? <button>Updatera</button> : <button>Boka</button>}
     </form>
   );
 };
