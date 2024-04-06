@@ -1,7 +1,7 @@
 // import '../App.css';
 // Render the main page of a Sushi restaurant
 
-import { createBooking, createRestaurant, deleteBooking, getBookings, updateBooking } from '../services/bookingService';
+import { createBooking, createRestaurant, deleteBooking, getAllBookings, updateBooking } from '../services/bookingService';
 
 await createRestaurant('Sato Sushi');
 const HomePage = () => {
@@ -9,7 +9,7 @@ const HomePage = () => {
     // await createBooking();
     // await deleteBooking(3);
     // await updateBooking(1);
-    const list = await getBookings();
+    const list = await getAllBookings();
     console.log(list);
     
     // console.log(JSON.parse(list[1].name).email);
