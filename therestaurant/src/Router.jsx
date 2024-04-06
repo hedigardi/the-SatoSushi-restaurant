@@ -4,6 +4,7 @@ import MenuPage from './pages/MenuPage';
 import ContactPage from './pages/ContactPage';
 import BookingPage from './pages/BookingPage';
 import BaseLayout from './pages/BaseLayout';
+import CreateBooking from './pages/CreateBooking';
 // import AdminPage from './pages/AdminPage';
 
 export const router = createBrowserRouter([

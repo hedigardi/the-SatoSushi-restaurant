@@ -27,7 +27,7 @@ const BookingForm = () => {
     e.preventDefault();
     try {
       await createBooking(formData);
-      setBookingMessage('Tack för din bokning!');
+      setBookingMessage('Tack! Din bokning är skapad!');
       
       setFormData({
         numberOfGuests: '',
