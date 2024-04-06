@@ -1,16 +1,31 @@
+import { useState } from 'react';
 import BookingForm from '../components/BookingForm';
-import { useEffect, useState } from 'react';
-import { ethers } from 'ethers';
-import { abi, contractAddress } from '../utils/config';
+import { createBooking } from '../services/bookingService';
 
 const BookingPage = () => {
+  const [booking, setBooking] = useState({
+    numberOfGuests: '',
+    name: { name: '', email: '', tel: '' },
+    date: '',
+    time: '',
+  });
+
+  const handleSaveBooking = async (formData) => {
+    try {
+      await createBooking(formData);
+      console.log('Booking created successfully!');
+    } catch (error) {
+      console.error('Error creating booking:', error);
+    }
+  };
+
   return (
     <section>
       <header>
         <h2>Boka Tid</h2>
       </header>
 
-      <BookingForm />
+      <BookingForm booking={booking} handleSaveBooking={handleSaveBooking} />
     </section>
   );
 };
