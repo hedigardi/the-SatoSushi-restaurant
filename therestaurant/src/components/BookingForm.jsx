@@ -1,14 +1,10 @@
 import { useState } from 'react';
 import bookableDates from '../utils/bookableDates';
-import { createBooking } from '../services/bookingService'; 
+import { createBooking } from '../services/bookingService';
 
-const BookingForm = () => {
-  const [formData, setFormData] = useState({
-    numberOfGuests: '',
-    name: { name: '', email: '', tel: '' },
-    date: '',
-    time: ''
-  });
+const BookingForm = ({ booking, handleSaveBooking }) => {
+  const [formData, setFormData] = useState(booking);
+  const [bookingMessage, setBookingMessage] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -19,7 +15,7 @@ const BookingForm = () => {
     e.preventDefault();
     try {
       await createBooking(formData);
-      console.log('Bokning skapad!');
+      setBookingMessage('Tack för din bokning!');
       
       setFormData({
         numberOfGuests: '',
@@ -128,6 +124,7 @@ const BookingForm = () => {
       </div>
 
       <button type="submit">Boka</button>
+      {bookingMessage && <p>{bookingMessage}</p>}
     </form>
   );
 };
