@@ -2,7 +2,16 @@ import { useState } from 'react';
 import bookableDates from '../utils/bookableDates';
 
 const BookingForm = ({ booking, handleSaveBooking }) => {
-  const [formData, setFormData] = useState(booking);
+  const [formData, setFormData] = useState(
+    booking || {
+      date: '',
+      time: '',
+      numberOfGuests: '',
+      name: '',
+      email: '',
+      tel: '',
+    }
+  );
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,6 +37,7 @@ const BookingForm = ({ booking, handleSaveBooking }) => {
           <select
             name="date"
             onChange={handleChange}
+            value={formData.date}
           >
             <option value="">-- Välj ett datum --</option>
             {bookableDates.map((date, index) => {
@@ -43,11 +53,13 @@ const BookingForm = ({ booking, handleSaveBooking }) => {
           </select>
         </label>
         <br />
+
         <label>
           Tid/Sittning:{' '}
           <select
             name="time"
             onChange={handleChange}
+            value={formData.time}
           >
             <option value="">-- Välj en sittning --</option>
             <option value="18">Sitting 1 (Kl. 18:00 - 20:00)</option>
@@ -55,11 +67,13 @@ const BookingForm = ({ booking, handleSaveBooking }) => {
           </select>
         </label>
         <br />
+
         <label>
           Antal Gäster:{' '}
           <select
             name="numberOfGuests"
             onChange={handleChange}
+            value={formData.numberOfGuests}
           >
             <option value="">-- Välj antal gäster --</option>
             <option value="1">1 person</option>
@@ -80,9 +94,11 @@ const BookingForm = ({ booking, handleSaveBooking }) => {
             name="name"
             placeholder="Ange namn"
             onChange={handleChange}
+            value={formData.name}
           />
         </label>
         <br />
+
         <label>
           E-post:{' '}
           <input
@@ -90,9 +106,11 @@ const BookingForm = ({ booking, handleSaveBooking }) => {
             name="email"
             placeholder="Ange e-post adress"
             onChange={handleChange}
+            value={formData.email}
           />
         </label>
         <br />
+
         <label>
           Telefon:{' '}
           <input
@@ -100,6 +118,7 @@ const BookingForm = ({ booking, handleSaveBooking }) => {
             name="tel"
             placeholder="Ange telefon-nummer"
             onChange={handleChange}
+            value={formData.tel}
           />
         </label>
       </div>
