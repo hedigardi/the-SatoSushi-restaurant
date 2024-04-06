@@ -1,17 +1,28 @@
 import { useState } from 'react';
 import bookableDates from '../utils/bookableDates';
+import { createBooking } from '../services/bookingService'; 
 
-const BookingForm = ({ booking, handleSaveBooking }) => {
-  const [formData, setFormData] = useState(booking);
+const BookingForm = () => {
+  const [formData, setFormData] = useState({
+    numberOfGuests: '',
+    name: { name: '', email: '', tel: '' },
+    date: '',
+    time: ''
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    handleSaveBooking(formData);
+    try {
+      await createBooking(formData);
+      console.log('Bokning skapad!');
+    } catch (error) {
+      console.error('Fel vid skapande av bokning:', error);
+    }
   };
 
   return (
@@ -19,7 +30,7 @@ const BookingForm = ({ booking, handleSaveBooking }) => {
       <div>
         <label>
           Datum:{' '}
-          <select name="date" value={formData.date} onChange={handleChange}>
+          <select name="date" onChange={handleChange}>
             <option value="">-- Välj ett datum --</option>
             {bookableDates.map((date, index) => (
               <option key={index} value={date}>
@@ -31,22 +42,22 @@ const BookingForm = ({ booking, handleSaveBooking }) => {
 
         <label>
           Tid/Sittning:{' '}
-          <select name="time" value={formData.time} onChange={handleChange}>
+          <select name="time" onChange={handleChange}>
             <option value="">-- Välj en sittning --</option>
-            <option value="">Sitting 1 (Kl. 18:00 - 20:00)</option>
-            <option value="">Sitting 2 (Kl. 21:00 - 23:00)</option>
+            <option value="1">Sitting 1 (Kl. 18:00 - 20:00)</option>
+            <option value="2">Sitting 2 (Kl. 21:00 - 23:00)</option>
           </select>
         </label>
 
         <label>
           Antal Gäster:{' '}
-          <select name="numberOfGuests" value={formData.numberOfGuests} onChange={handleChange}>
-            <option value="">1</option>
-            <option value="">2</option>
-            <option value="">3</option>
-            <option value="">4</option>
-            <option value="">5</option>
-            <option value="">6</option>
+          <select name="numberOfGuests" onChange={handleChange}>
+            <option value="">-- Välj antal gäster --</option>
+            {[1, 2, 3, 4, 5, 6].map((number, index) => (
+              <option key={index} value={number}>
+                {number}
+              </option>
+            ))}
           </select>
         </label>
       </div>
@@ -58,9 +69,13 @@ const BookingForm = ({ booking, handleSaveBooking }) => {
           <input
             type="text"
             name="name"
-            value={formData.name}
-            onChange={handleChange}
             placeholder="Ange namn"
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                name: { ...formData.name, name: e.target.value }
+              })
+            }
           />
         </label>
 
@@ -70,9 +85,13 @@ const BookingForm = ({ booking, handleSaveBooking }) => {
           <input
             type="email"
             name="email"
-            value={formData.email}
-            onChange={handleChange}
             placeholder="Ange e-post adress"
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                name: { ...formData.name, email: e.target.value }
+              })
+            }
           />
         </label>
 
@@ -82,9 +101,13 @@ const BookingForm = ({ booking, handleSaveBooking }) => {
           <input
             type="tel"
             name="tel"
-            value={formData.tel}
-            onChange={handleChange}
             placeholder="Ange telefon-nummer"
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                name: { ...formData.name, tel: e.target.value }
+              })
+            }
           />
         </label>
       </div>
