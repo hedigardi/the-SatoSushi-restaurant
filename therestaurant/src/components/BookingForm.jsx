@@ -45,7 +45,7 @@ const BookingForm = () => {
       <div>
         <label>
           Datum:{' '}
-          <select name="date" onChange={handleChange}>
+          <select name="date" onChange={handleChange} value={formData.date}>
             <option value="">-- Välj ett datum --</option>
             {bookableDates.map((date, index) => (
               <option key={index} value={date}>
@@ -57,7 +57,7 @@ const BookingForm = () => {
 
         <label>
           Tid/Sittning:{' '}
-          <select name="time" onChange={handleChange}>
+          <select name="time" onChange={handleChange} value={formData.time}>
             <option value="">-- Välj en sittning --</option>
             <option value="1">Sitting 1 (Kl. 18:00 - 20:00)</option>
             <option value="2">Sitting 2 (Kl. 21:00 - 23:00)</option>
@@ -66,7 +66,7 @@ const BookingForm = () => {
 
         <label>
           Antal Gäster:{' '}
-          <select name="numberOfGuests" onChange={handleChange}>
+          <select name="numberOfGuests" onChange={handleChange} value={formData.numberOfGuests}>
             <option value="">-- Välj antal gäster --</option>
             {[1, 2, 3, 4, 5, 6].map((number, index) => (
               <option key={index} value={number}>
@@ -86,6 +86,7 @@ const BookingForm = () => {
             name="name"
             placeholder="Ange namn"
             onChange={handleChange}
+            value={formData.name.name}
           />
         </label>
 
@@ -97,6 +98,7 @@ const BookingForm = () => {
             name="email"
             placeholder="Ange e-post adress"
             onChange={handleChange}
+            value={formData.name.email}
           />
         </label>
 
@@ -108,6 +110,7 @@ const BookingForm = () => {
             name="tel"
             placeholder="Ange telefon-nummer"
             onChange={handleChange}
+            value={formData.name.tel}
           />
         </label>
       </div>
