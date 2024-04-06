@@ -1,6 +1,10 @@
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import AdminContext from '../context/AdminContext';
 
-const AdminOverview = ({ bookings, handleCreateBooking }) => {
+const AdminOverview = () => {
+  const [bookings, handleCreateBooking] = useContext(AdminContext);
+
   return (
     <>
       <ul>

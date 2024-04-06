@@ -10,6 +10,7 @@ import BookingList from '../components/BookingList';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import Booking from '../model/Booking';
 import AdminOverview from './AdminOverview';
+import AdminContext from '../context/AdminContext';
 
 const AdminPage = () => {
   const [bookings, setBookings] = useState([]);
@@ -83,14 +84,9 @@ const AdminPage = () => {
     <div>
       <h2>Admin Page</h2>
 
-      {useLocation().pathname === '/admin' ? (
-        <AdminOverview
-          bookings={bookings}
-          handleCreateBooking={handleCreateBooking}
-        />
-      ) : (
+      <AdminContext.Provider value={[bookings, handleCreateBooking]}>
         <Outlet />
-      )}
+      </AdminContext.Provider>
 
       {/* <Link to="/CreateBooking">Create New Booking</Link>
       <BookingList

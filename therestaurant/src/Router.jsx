@@ -5,6 +5,7 @@ import ContactPage from './pages/ContactPage';
 import BookingPage from './pages/BookingPage';
 import BaseLayout from './pages/BaseLayout';
 import AdminPage from './pages/AdminPage';
+import AdminOverview from './pages/AdminOverview';
 // import AdminPage from './pages/AdminPage';
 
 export const router = createBrowserRouter([
@@ -35,7 +36,7 @@ export const router = createBrowserRouter([
         children: [
           {
             path: '/admin/',
-            element: <h2>Admin</h2>,
+            element: <AdminOverview />,
           },
           {
             path: '/admin/create',
