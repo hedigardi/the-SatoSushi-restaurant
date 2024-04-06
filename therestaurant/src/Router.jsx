@@ -34,6 +34,10 @@ export const router = createBrowserRouter([
         element: <AdminPage />,
         children: [
           {
+            path: '/admin/',
+            element: <h2>Admin</h2>,
+          },
+          {
             path: '/admin/create',
             element: <h2>Create Booking</h2>,
           },

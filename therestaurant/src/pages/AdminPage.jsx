@@ -7,8 +7,9 @@ import {
 } from '../services/bookingService';
 import BookingForm from '../components/BookingForm';
 import BookingList from '../components/BookingList';
-import { Link } from 'react-router-dom';
+import { Link, Outlet, useLocation } from 'react-router-dom';
 import Booking from '../model/Booking';
+import AdminOverview from './AdminOverview';
 
 const AdminPage = () => {
   const [bookings, setBookings] = useState([]);
@@ -82,24 +83,14 @@ const AdminPage = () => {
     <div>
       <h2>Admin Page</h2>
 
-      {bookings.map((booking) => {
-        let { id, numberOfGuests: guests, name: person, date, time } = booking;
-        id = Number(id);
-        guests = Number(guests);
-        person = JSON.parse(person);
-        time = Number(time);
-
-        return (
-          <div key={id}>
-            Guests: {guests} - Name: {person.name} - E-mail: {person.email} -
-            Tel: {person.tel} - Date: {date} - Time: {time}
-            :00-
-            {time + 2}:00
-          </div>
-        );
-      })}
-
-      <button onClick={handleCreateBooking}>Create Dummy Booking</button>
+      {useLocation().pathname === '/admin' ? (
+        <AdminOverview
+          bookings={bookings}
+          handleCreateBooking={handleCreateBooking}
+        />
+      ) : (
+        <Outlet />
+      )}
 
       {/* <Link to="/CreateBooking">Create New Booking</Link>
       <BookingList
