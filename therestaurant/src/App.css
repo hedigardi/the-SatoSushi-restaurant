@@ -192,3 +192,11 @@ p.about_us {
     transform: rotate(360deg);
   }
 }
+
+.booking-message {
+  transition: opacity 3s ease-out;
+}
+
+.booking-message.hide {
+  opacity: 0;
+}

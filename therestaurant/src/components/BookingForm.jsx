@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import bookableDates from '../utils/bookableDates';
 import { createBooking } from '../services/bookingService';
+import '../App.css';
 
 const BookingForm = () => {
   const [formData, setFormData] = useState({
@@ -11,6 +12,14 @@ const BookingForm = () => {
   });
   const [bookingMessage, setBookingMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setBookingMessage(''); 
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, [bookingMessage]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -37,10 +46,6 @@ const BookingForm = () => {
         date: '',
         time: '',
       });
-
-      setTimeout(() => {
-        setBookingMessage('');
-      }, 3000);
     } catch (error) {
       console.error('Fel vid skapande av bokning:', error);
     } finally {
@@ -135,7 +140,7 @@ const BookingForm = () => {
         <button>Boka</button>
         {isLoading && <div className="loading-spinner"></div>}
       </div>
-      {bookingMessage && <p>{bookingMessage}</p>}
+      {bookingMessage && <p className="booking-message">{bookingMessage}</p>}
     </form>
   );
 };
