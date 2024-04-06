@@ -39,7 +39,7 @@ export const router = createBrowserRouter([
         children: [
           {
             path: '/admin/create',
-            element: <h2>Create Booking</h2>,
+            element: <CreateBooking />,
           },
           {
             path: '/admin/:bookingId',
