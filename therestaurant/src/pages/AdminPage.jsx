@@ -25,7 +25,7 @@ const AdminPage = () => {
       const fetchedBookings = await getAllBookings();
       setBookings(fetchedBookings);
     } catch (error) {
-      console.error('Error fetching bookings:', error);
+      console.error('Error fetching all bookings:', error);
     }
   };
 
@@ -44,15 +44,7 @@ const AdminPage = () => {
     }
   };
 
-  const handleDeleteBooking = async (id) => {
-    try {
-      await deleteBooking(id);
-      fetchBookings();
-    } catch (error) {
-      console.error('Error deleting booking:', error);
-    }
-  };
-
+  
   const handleCreateBooking = async (newBooking) => {
     try {
       await createBooking(newBooking);
@@ -78,11 +70,22 @@ const AdminPage = () => {
     }
   };
 
+  const handleDeleteBooking = async (id) => {
+    try {
+      await deleteBooking(id);
+      fetchBookings();
+    } catch (error) {
+      console.error('Error deleting booking:', error);
+    }
+  };
+
   return (
     <div>
       <h2>Admin Page</h2>
 
-      <AdminContext.Provider value={[bookings, handleCreateBooking]}>
+      <AdminContext.Provider
+        value={[bookings, handleCreateBooking, handleDeleteBooking]}
+      >
         <Outlet />
       </AdminContext.Provider>
 

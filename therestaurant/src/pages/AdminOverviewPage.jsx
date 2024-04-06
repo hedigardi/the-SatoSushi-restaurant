@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import AdminContext from '../context/AdminContext';
 
 const AdminOverviewPage = () => {
-  const [bookings, handleCreateBooking] = useContext(AdminContext);
+  const [bookings, handleCreateBooking, handleDeleteBooking] =
+    useContext(AdminContext);
 
   return (
     <>
@@ -38,6 +39,13 @@ const AdminOverviewPage = () => {
               </span>
               <br />
               <Link to={'/admin/' + id}>Edit</Link>
+              <button
+                onClick={() => {
+                  handleDeleteBooking(id);
+                }}
+              >
+                Remove
+              </button>
             </li>
           );
         })}

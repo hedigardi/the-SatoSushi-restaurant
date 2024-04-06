@@ -22,6 +22,7 @@ const AdminEditPage = () => {
   return (
     <>
       <h3>Edit Booking</h3>
+      <p>{bookingId}</p>
       <p>{editBooking}</p>
     </>
   );
