@@ -2,13 +2,25 @@ import { useState } from 'react';
 import bookableDates from '../utils/bookableDates';
 import { createBooking } from '../services/bookingService';
 
-const BookingForm = ({ booking, handleSaveBooking }) => {
-  const [formData, setFormData] = useState(booking);
+const BookingForm = () => {
+  const [formData, setFormData] = useState({
+    numberOfGuests: '',
+    name: { name: '', email: '', tel: '' },
+    date: '',
+    time: '',
+  });
   const [bookingMessage, setBookingMessage] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    if (name === 'name' || name === 'email' || name === 'tel') {
+      setFormData({
+        ...formData,
+        name: { ...formData.name, [name]: value },
+      });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -21,7 +33,7 @@ const BookingForm = ({ booking, handleSaveBooking }) => {
         numberOfGuests: '',
         name: { name: '', email: '', tel: '' },
         date: '',
-        time: ''
+        time: '',
       });
     } catch (error) {
       console.error('Fel vid skapande av bokning:', error);
@@ -73,12 +85,7 @@ const BookingForm = ({ booking, handleSaveBooking }) => {
             type="text"
             name="name"
             placeholder="Ange namn"
-            onChange={(e) =>
-              setFormData({
-                ...formData,
-                name: { ...formData.name, name: e.target.value }
-              })
-            }
+            onChange={handleChange}
           />
         </label>
 
@@ -89,12 +96,7 @@ const BookingForm = ({ booking, handleSaveBooking }) => {
             type="email"
             name="email"
             placeholder="Ange e-post adress"
-            onChange={(e) =>
-              setFormData({
-                ...formData,
-                name: { ...formData.name, email: e.target.value }
-              })
-            }
+            onChange={handleChange}
           />
         </label>
 
@@ -105,12 +107,7 @@ const BookingForm = ({ booking, handleSaveBooking }) => {
             type="tel"
             name="tel"
             placeholder="Ange telefon-nummer"
-            onChange={(e) =>
-              setFormData({
-                ...formData,
-                name: { ...formData.name, tel: e.target.value }
-              })
-            }
+            onChange={handleChange}
           />
         </label>
       </div>
