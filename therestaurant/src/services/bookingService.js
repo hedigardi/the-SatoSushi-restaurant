@@ -20,12 +20,13 @@ if (window.ethereum) {
 export const createRestaurant = async (name) => {
   const currentRestaurant = await readContract['restaurants'](1);
   restaurantId = Number(currentRestaurant.id);
-  // console.log(await currentRestaurant.id);
-  if (restaurantId === 0)  {
-   await writeContract.createRestaurant(name);
-} else {
-  console.log('Restaurant already exists');
-}}
+  console.log(await currentRestaurant.id);
+  if (restaurantId === 0) {
+    await writeContract.createRestaurant(name);
+  } else {
+    console.log('Restaurant already exists');
+  }
+};
 
 export const getBookings = async () => {
   const count = await readContract['bookingCount']();
@@ -42,9 +43,7 @@ export const getBookings = async () => {
 export const createBooking = async (newBooking) => {
   return await writeContract.createBooking(
     newBooking.numberOfGuests,
-    JSON.stringify(
-      newBooking.name
-    ),
+    JSON.stringify(newBooking.name),
     newBooking.date,
     newBooking.time,
     restaurantId
@@ -52,9 +51,7 @@ export const createBooking = async (newBooking) => {
 };
 
 export const deleteBooking = async (id) => {
-
   await writeContract.removeBooking(id);
-
 };
 
 export const updateBooking = async (id, updateBooking) => {
@@ -63,5 +60,6 @@ export const updateBooking = async (id, updateBooking) => {
     updateBooking.numberOfGuests,
     JSON.stringify(updateBooking.name),
     updateBooking.date,
-    updateBooking.time);
+    updateBooking.time
+  );
 };
