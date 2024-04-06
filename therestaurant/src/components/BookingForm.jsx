@@ -37,6 +37,10 @@ const BookingForm = () => {
         date: '',
         time: '',
       });
+
+      setTimeout(() => {
+        setBookingMessage('');
+      }, 3000);
     } catch (error) {
       console.error('Fel vid skapande av bokning:', error);
     } finally {
