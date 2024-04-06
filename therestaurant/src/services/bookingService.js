@@ -28,7 +28,7 @@ export const createRestaurant = async (name) => {
   }
 };
 
-export const getBookings = async () => {
+export const getAllBookings = async () => {
   const count = await readContract['bookingCount']();
   const temp = [];
 
@@ -38,6 +38,10 @@ export const getBookings = async () => {
   }
 
   return temp;
+};
+
+export const getBooking = async (id) => {
+  return await readContract['bookings'](id);
 };
 
 export const createBooking = async (newBooking) => {
@@ -51,7 +55,7 @@ export const createBooking = async (newBooking) => {
 };
 
 export const deleteBooking = async (id) => {
-  await writeContract.removeBooking(id);
+  return await writeContract.removeBooking(id);
 };
 
 export const updateBooking = async (id, updateBooking) => {

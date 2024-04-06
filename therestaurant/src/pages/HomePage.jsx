@@ -5,7 +5,7 @@ import {
   createBooking,
   createRestaurant,
   deleteBooking,
-  getBookings,
+  getAllBookings,
   updateBooking,
 } from '../services/bookingService';
 
@@ -16,9 +16,8 @@ const HomePage = () => {
     // await createBooking();
     // await deleteBooking(3);
     // await updateBooking(1);
-    const list = await getBookings();
-    console.log(list);
-
+    // const list = await getAllBookings();
+    // console.log(list);
     // console.log(JSON.parse(list[1].name).email);
   };
 

@@ -5,7 +5,8 @@ import ContactPage from './pages/ContactPage';
 import BookingPage from './pages/BookingPage';
 import BaseLayout from './pages/BaseLayout';
 import AdminPage from './pages/AdminPage';
-import AdminOverview from './pages/AdminOverview';
+import AdminOverviewPage from './pages/AdminOverviewPage';
+import AdminEditPage from './pages/AdminEditPage';
 // import AdminPage from './pages/AdminPage';
 
 export const router = createBrowserRouter([
@@ -36,7 +37,7 @@ export const router = createBrowserRouter([
         children: [
           {
             path: '/admin/',
-            element: <AdminOverview />,
+            element: <AdminOverviewPage />,
           },
           {
             path: '/admin/create',
@@ -44,7 +45,7 @@ export const router = createBrowserRouter([
           },
           {
             path: '/admin/:bookingId',
-            element: <h2>Edit Booking</h2>,
+            element: <AdminEditPage />,
           },
         ],
       },

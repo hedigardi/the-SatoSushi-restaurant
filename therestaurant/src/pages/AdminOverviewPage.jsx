@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import AdminContext from '../context/AdminContext';
 
-const AdminOverview = () => {
+const AdminOverviewPage = () => {
   const [bookings, handleCreateBooking] = useContext(AdminContext);
 
   return (
@@ -24,13 +24,19 @@ const AdminOverview = () => {
           return (
             <li key={id}>
               <span>Guests: {guests}</span>
+              <br />
               <span>Name: {person.name}</span>
+              <br />
               <span>E-mail: {person.email}</span>
+              <br />
               <span>Tel: {person.tel}</span>
+              <br />
               <span>Date: {date}</span>
+              <br />
               <span>
                 Time: {time}:00 - {time + 2}:00
               </span>
+              <br />
               <Link to={'/admin/' + id}>Edit</Link>
             </li>
           );
@@ -42,4 +48,4 @@ const AdminOverview = () => {
   );
 };
 
-export default AdminOverview;
+export default AdminOverviewPage;

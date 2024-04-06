@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react';
 import {
-  getBookings,
   deleteBooking,
   updateBooking,
   createBooking,
+  getAllBookings,
+  getBooking,
 } from '../services/bookingService';
 import BookingForm from '../components/BookingForm';
 import BookingList from '../components/BookingList';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import Booking from '../model/Booking';
-import AdminOverview from './AdminOverview';
 import AdminContext from '../context/AdminContext';
 
 const AdminPage = () => {
@@ -22,14 +22,12 @@ const AdminPage = () => {
 
   const fetchBookings = async () => {
     try {
-      const fetchedBookings = await getBookings();
+      const fetchedBookings = await getAllBookings();
       setBookings(fetchedBookings);
     } catch (error) {
       console.error('Error fetching bookings:', error);
     }
   };
-
-  console.log(bookings);
 
   /*
   const handleEditBooking = (booking) => {
