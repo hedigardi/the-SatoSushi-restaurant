@@ -20,6 +20,13 @@ const BookingForm = () => {
     try {
       await createBooking(formData);
       console.log('Bokning skapad!');
+      
+      setFormData({
+        numberOfGuests: '',
+        name: { name: '', email: '', tel: '' },
+        date: '',
+        time: ''
+      });
     } catch (error) {
       console.error('Fel vid skapande av bokning:', error);
     }
