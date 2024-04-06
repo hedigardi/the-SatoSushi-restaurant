@@ -58,10 +58,10 @@ const AdminPage = () => {
     try {
       await createBooking(
         new Booking(
-          2,
-          { name: 'hej', email: 'nej@n.n', tel: '0123654789' },
-          '2024-04-06',
-          21
+          6,
+          { name: 'Ro', email: 'do@n.n', tel: '0123654789' },
+          '2024-04-08',
+          18
         )
       );
       fetchBookings();

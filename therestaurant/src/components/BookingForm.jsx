@@ -25,8 +25,6 @@ const BookingForm = ({ booking, handleSaveBooking }) => {
     handleSaveBooking(formData);
   };
 
-  console.log(useLocation());
-
   return (
     <form
       onSubmit={(e) => {

@@ -1,4 +1,4 @@
-import { createBrowserRouter, Outlet } from 'react-router-dom';
+import { createBrowserRouter } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import MenuPage from './pages/MenuPage';
 import ContactPage from './pages/ContactPage';
@@ -7,7 +7,7 @@ import BaseLayout from './pages/BaseLayout';
 import AdminPage from './pages/AdminPage';
 import AdminOverviewPage from './pages/AdminOverviewPage';
 import AdminEditPage from './pages/AdminEditPage';
-// import AdminPage from './pages/AdminPage';
+import CreateBooking from './pages/CreateBooking';
 
 export const router = createBrowserRouter([
   {
@@ -41,7 +41,7 @@ export const router = createBrowserRouter([
           },
           {
             path: '/admin/create',
-            element: <h2>Create Booking</h2>,
+            element: <CreateBooking />,
           },
           {
             path: '/admin/:bookingId',
