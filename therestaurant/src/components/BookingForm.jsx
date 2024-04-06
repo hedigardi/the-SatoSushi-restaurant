@@ -14,6 +14,8 @@ const BookingForm = ({ booking, handleSaveBooking }) => {
     handleSaveBooking(formData);
   };
 
+  console.log(formData);
+
   return (
     <form
       onSubmit={(e) => {
@@ -23,7 +25,10 @@ const BookingForm = ({ booking, handleSaveBooking }) => {
       <div>
         <label>
           Datum:{' '}
-          <select>
+          <select
+            name="date"
+            onChange={handleChange}
+          >
             <option value="">-- Välj ett datum --</option>
             {bookableDates.map((date, index) => {
               return (
@@ -37,57 +42,64 @@ const BookingForm = ({ booking, handleSaveBooking }) => {
             })}
           </select>
         </label>
-
+        <br />
         <label>
           Tid/Sittning:{' '}
-          <select>
+          <select
+            name="time"
+            onChange={handleChange}
+          >
             <option value="">-- Välj en sittning --</option>
-            <option value="">Sitting 1 (Kl. 18:00 - 20:00)</option>
-            <option value="">Sitting 2 (Kl. 21:00 - 23:00)</option>
+            <option value="18">Sitting 1 (Kl. 18:00 - 20:00)</option>
+            <option value="21">Sitting 2 (Kl. 21:00 - 23:00)</option>
           </select>
         </label>
-
+        <br />
         <label>
           Antal Gäster:{' '}
-          <select>
-            <option value="">1</option>
-            <option value="">2</option>
-            <option value="">3</option>
-            <option value="">4</option>
-            <option value="">5</option>
-            <option value="">6</option>
+          <select
+            name="numberOfGuests"
+            onChange={handleChange}
+          >
+            <option value="">-- Välj antal gäster --</option>
+            <option value="1">1 person</option>
+            <option value="2">2 personer</option>
+            <option value="3">3 personer</option>
+            <option value="4">4 personer</option>
+            <option value="5">5 personer</option>
+            <option value="6">6 personer</option>
           </select>
         </label>
       </div>
 
       <div>
         <label>
-          {' '}
           Namn:{' '}
           <input
             type="text"
             name="name"
             placeholder="Ange namn"
+            onChange={handleChange}
           />
         </label>
-
+        <br />
         <label>
-          {' '}
           E-post:{' '}
           <input
             type="email"
             name="email"
             placeholder="Ange e-post adress"
+            onChange={handleChange}
           />
         </label>
-
+        <br />
         <label>
-          {' '}
           Telefon:{' '}
           <input
             type="tel"
             name="tel"
             placeholder="Ange telefon-nummer"
+            onChange={handleChange}
           />
         </label>
       </div>

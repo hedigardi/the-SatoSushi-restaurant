@@ -20,7 +20,6 @@ if (window.ethereum) {
 export const createRestaurant = async (name) => {
   const currentRestaurant = await readContract['restaurants'](1);
   restaurantId = Number(currentRestaurant.id);
-  console.log(await currentRestaurant.id);
   if (restaurantId === 0) {
     await writeContract.createRestaurant(name);
   } else {
