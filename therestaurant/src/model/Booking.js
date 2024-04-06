@@ -3,9 +3,10 @@ class Booking {
   name;
   date;
   time;
-  constructor(numberOfGuests, name, date, time) {
+
+  constructor(numberOfGuests, { name, email, tel }, date, time) {
     this.numberOfGuests = numberOfGuests;
-    this.name = name;
+    this.name = { name, email, tel };
     this.date = date;
     this.time = time;
   }

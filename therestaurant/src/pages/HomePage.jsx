@@ -1,6 +1,7 @@
 // import '../App.css';
 // Render the main page of a Sushi restaurant
 
+import Booking from '../model/Booking';
 import {
   createBooking,
   createRestaurant,
