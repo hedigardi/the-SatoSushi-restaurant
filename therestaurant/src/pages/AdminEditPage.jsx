@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getBooking } from '../services/bookingService';
+import BookingForm from '../components/BookingForm';
 
 const AdminEditPage = () => {
   const { bookingId } = useParams();
@@ -13,7 +14,16 @@ const AdminEditPage = () => {
   const fetchBooking = async () => {
     try {
       const fetchedBooking = await getBooking(bookingId);
-      setEditBooking(fetchedBooking);
+      const processBooking = {
+        date: fetchedBooking.date,
+        time: Number(fetchedBooking.time),
+        numberOfGuests: Number(fetchedBooking.numberOfGuests),
+        name: JSON.parse(fetchedBooking.name).name,
+        email: JSON.parse(fetchedBooking.name).email,
+        tel: JSON.parse(fetchedBooking.name).tel,
+      };
+
+      setEditBooking(processBooking);
     } catch (error) {
       console.error('Error fetching booking by id:', error);
     }
@@ -22,8 +32,7 @@ const AdminEditPage = () => {
   return (
     <>
       <h3>Edit Booking</h3>
-      <p>{bookingId}</p>
-      <p>{editBooking}</p>
+      {editBooking && <BookingForm booking={editBooking} />}
     </>
   );
 };

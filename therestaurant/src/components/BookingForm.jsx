@@ -23,8 +23,6 @@ const BookingForm = ({ booking, handleSaveBooking }) => {
     handleSaveBooking(formData);
   };
 
-  console.log(formData);
-
   return (
     <form
       onSubmit={(e) => {
