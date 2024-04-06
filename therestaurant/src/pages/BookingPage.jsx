@@ -1,4 +1,7 @@
 import BookingForm from '../components/BookingForm';
+import { useEffect, useState } from 'react';
+import { ethers } from 'ethers';
+import { abi, contractAddress } from '../utils/config';
 
 const BookingPage = () => {
   return (
