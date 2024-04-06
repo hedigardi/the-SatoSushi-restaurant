@@ -1,11 +1,14 @@
-import { createBrowserRouter, Outlet } from 'react-router-dom';
+import { createBrowserRouter } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import MenuPage from './pages/MenuPage';
 import ContactPage from './pages/ContactPage';
 import BookingPage from './pages/BookingPage';
 import BaseLayout from './pages/BaseLayout';
+import AdminPage from './pages/AdminPage';
+import AdminOverviewPage from './pages/AdminOverviewPage';
+import AdminEditPage from './pages/AdminEditPage';
 import CreateBooking from './pages/CreateBooking';
-// import AdminPage from './pages/AdminPage';
+
 
 export const router = createBrowserRouter([
   {
@@ -31,20 +34,19 @@ export const router = createBrowserRouter([
       },
       {
         path: '/admin',
-        element: (
-          <>
-            <h1>Admin</h1>
-            <Outlet />
-          </>
-        ),
+        element: <AdminPage />,
         children: [
+          {
+            path: '/admin/',
+            element: <AdminOverviewPage />,
+          },
           {
             path: '/admin/create',
             element: <CreateBooking />,
           },
           {
             path: '/admin/:bookingId',
-            element: <h2>Edit Booking</h2>,
+            element: <AdminEditPage />,
           },
         ],
       },
