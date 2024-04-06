@@ -1,15 +1,8 @@
-import { useState } from 'react';
+import React from 'react';
 import BookingForm from '../components/BookingForm';
 import { createBooking } from '../services/bookingService';
 
 const BookingPage = () => {
-  const [booking, setBooking] = useState({
-    numberOfGuests: '',
-    name: { name: '', email: '', tel: '' },
-    date: '',
-    time: '',
-  });
-
   const handleSaveBooking = async (formData) => {
     try {
       await createBooking(formData);
@@ -25,7 +18,7 @@ const BookingPage = () => {
         <h2>Boka Tid</h2>
       </header>
 
-      <BookingForm booking={booking} handleSaveBooking={handleSaveBooking} />
+      <BookingForm handleSaveBooking={handleSaveBooking} />
     </section>
   );
 };
