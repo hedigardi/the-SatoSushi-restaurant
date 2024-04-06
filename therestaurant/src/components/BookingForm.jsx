@@ -10,6 +10,7 @@ const BookingForm = () => {
     time: '',
   });
   const [bookingMessage, setBookingMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,6 +26,7 @@ const BookingForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       await createBooking(formData);
       setBookingMessage('Tack! Din bokning är skapad!');
@@ -37,6 +39,8 @@ const BookingForm = () => {
       });
     } catch (error) {
       console.error('Fel vid skapande av bokning:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -123,7 +127,10 @@ const BookingForm = () => {
         </span>
       </div>
 
-      <button type="submit">Boka</button>
+      <div className="button-container">
+        <button>Boka</button>
+        {isLoading && <div className="loading-spinner"></div>}
+      </div>
       {bookingMessage && <p>{bookingMessage}</p>}
     </form>
   );
