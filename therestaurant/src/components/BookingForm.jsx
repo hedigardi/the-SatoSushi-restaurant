@@ -15,32 +15,23 @@ const BookingForm = ({ booking, handleSaveBooking }) => {
   };
 
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-      }}
-    >
+    <form onSubmit={handleSubmit}>
       <div>
         <label>
           Datum:{' '}
-          <select>
+          <select name="date" value={formData.date} onChange={handleChange}>
             <option value="">-- Välj ett datum --</option>
-            {bookableDates.map((date, index) => {
-              return (
-                <option
-                  key={index}
-                  value={date}
-                >
-                  {date}
-                </option>
-              );
-            })}
+            {bookableDates.map((date, index) => (
+              <option key={index} value={date}>
+                {date}
+              </option>
+            ))}
           </select>
         </label>
 
         <label>
           Tid/Sittning:{' '}
-          <select>
+          <select name="time" value={formData.time} onChange={handleChange}>
             <option value="">-- Välj en sittning --</option>
             <option value="">Sitting 1 (Kl. 18:00 - 20:00)</option>
             <option value="">Sitting 2 (Kl. 21:00 - 23:00)</option>
@@ -49,7 +40,7 @@ const BookingForm = ({ booking, handleSaveBooking }) => {
 
         <label>
           Antal Gäster:{' '}
-          <select>
+          <select name="numberOfGuests" value={formData.numberOfGuests} onChange={handleChange}>
             <option value="">1</option>
             <option value="">2</option>
             <option value="">3</option>
@@ -67,6 +58,8 @@ const BookingForm = ({ booking, handleSaveBooking }) => {
           <input
             type="text"
             name="name"
+            value={formData.name}
+            onChange={handleChange}
             placeholder="Ange namn"
           />
         </label>
@@ -77,6 +70,8 @@ const BookingForm = ({ booking, handleSaveBooking }) => {
           <input
             type="email"
             name="email"
+            value={formData.email}
+            onChange={handleChange}
             placeholder="Ange e-post adress"
           />
         </label>
@@ -87,6 +82,8 @@ const BookingForm = ({ booking, handleSaveBooking }) => {
           <input
             type="tel"
             name="tel"
+            value={formData.tel}
+            onChange={handleChange}
             placeholder="Ange telefon-nummer"
           />
         </label>
@@ -100,7 +97,7 @@ const BookingForm = ({ booking, handleSaveBooking }) => {
         </span>
       </div>
 
-      <button>Boka</button>
+      <button type="submit">Boka</button>
     </form>
   );
 };
