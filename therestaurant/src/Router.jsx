@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, Outlet } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import MenuPage from './pages/MenuPage';
 import ContactPage from './pages/ContactPage';
@@ -30,7 +30,12 @@ export const router = createBrowserRouter([
       },
       {
         path: '/admin',
-        element: <></>,
+        element: (
+          <>
+            <h1>Admin</h1>
+            <Outlet />
+          </>
+        ),
         children: [
           {
             path: '/admin/create',

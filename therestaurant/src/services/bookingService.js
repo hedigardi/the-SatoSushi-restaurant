@@ -1,9 +1,10 @@
-/* import { ethers } from 'ethers';
-import { abi, contractAddress } from '../config';
+import { ethers } from 'ethers';
+import { abi, contractAddress } from '../utils/config';
 
 let provider;
 let readContract;
 let writeContract;
+let restaurantId = 0;
 
 if (window.ethereum) {
   provider = new ethers.BrowserProvider(window.ethereum);
@@ -16,26 +17,51 @@ if (window.ethereum) {
   );
 }
 
+export const createRestaurant = async (name) => {
+  const currentRestaurant = await readContract['restaurants'](1);
+  restaurantId = Number(currentRestaurant.id);
+  // console.log(await currentRestaurant.id);
+  if (restaurantId === 0)  {
+   await writeContract.createRestaurant(name);
+} else {
+  console.log('Restaurant already exists');
+}}
+
 export const getBookings = async () => {
-  const response = await axios.get('...här läggs in adressen till API:t...');
-  return response.data;
-};
+  const count = await readContract['bookingCount']();
+  const temp = [];
 
-export const deleteBooking = async (id) => {
-  await axios.delete(`...här läggs in adressen till API:t.../${id}`);
-  console.log(`Deleting booking with id ${id}`);
-};
+  for (let i = 0; i <= Number(count); ++i) {
+    const booking = await readContract['bookings'](i);
+    if (booking.id > 0) temp.push(booking);
+  }
 
-export const updateBooking = async (updatedBooking) => {
-  await axios.put(
-    `...här läggs in adressen till API:t.../${updatedBooking.id}`,
-    updatedBooking
-  );
-  console.log('Updating booking:', updatedBooking);
+  return temp;
 };
 
 export const createBooking = async (newBooking) => {
-  await axios.post('...här läggs in adressen till API:t...', newBooking);
-  console.log('Creating new booking:', newBooking);
+  return await writeContract.createBooking(
+    newBooking.numberOfGuests,
+    JSON.stringify(
+      newBooking.name
+    ),
+    newBooking.date,
+    newBooking.time,
+    restaurantId
+  );
 };
- */
+
+export const deleteBooking = async (id) => {
+
+  await writeContract.removeBooking(id);
+
+};
+
+export const updateBooking = async (id, updateBooking) => {
+  return await writeContract.editBooking(
+    id,
+    updateBooking.numberOfGuests,
+    JSON.stringify(updateBooking.name),
+    updateBooking.date,
+    updateBooking.time);
+};
