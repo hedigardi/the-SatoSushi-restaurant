@@ -106,7 +106,6 @@ const BookingForm = ({ booking, id }) => {
       </div>
 
       <div className="button-container">
-        <button>Boka</button>
         {isLoading && <div className="loading-spinner"></div>}
       </div>
       {bookingMessage && <p className="booking-message">{bookingMessage}</p>}
