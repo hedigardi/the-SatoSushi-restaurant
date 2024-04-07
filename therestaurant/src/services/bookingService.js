@@ -43,6 +43,11 @@ export const getBooking = async (id) => {
   return await readContract['bookings'](id);
 };
 
+export const getBookingCount = async () => {
+  const count = await readContract['bookingCount']();
+  return Number(count);
+};
+
 export const createBooking = async (newBooking) => {
   return await writeContract.createBooking(
     newBooking.numberOfGuests,
@@ -66,4 +71,3 @@ export const updateBooking = async (id, updateBooking) => {
     updateBooking.time
   );
 };
-

@@ -1,15 +1,20 @@
 import { useState, useEffect } from 'react';
-import bookableDates from '../utils/bookableDates';
-import { createBooking } from '../services/bookingService';
+import { createBooking, updateBooking } from '../services/bookingService';
+import FormBookingInfo from './FormBookingInfo';
+import FormGuestInfo from './FormGuestInfo';
+import Gdpr from './Gdpr';
+import { Link, useLocation } from 'react-router-dom';
 import '../App.css';
 
-const BookingForm = () => {
-  const [formData, setFormData] = useState({
-    numberOfGuests: '',
-    name: { name: '', email: '', tel: '' },
-    date: '',
-    time: '',
-  });
+const BookingForm = ({ booking, id }) => {
+  const [formData, setFormData] = useState(
+    booking || {
+      numberOfGuests: '',
+      name: { name: '', email: '', tel: '' },
+      date: '',
+      time: '',
+    }
+  );
   const [bookingMessage, setBookingMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
@@ -33,13 +38,11 @@ const BookingForm = () => {
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsLoading(true);
+  const handleCreateBooking = async (formData) => {
     try {
       await createBooking(formData);
       setBookingMessage('Tack! Din bokning är skapad!');
-      
+
       setFormData({
         numberOfGuests: '',
         name: { name: '', email: '', tel: '' },
@@ -53,87 +56,53 @@ const BookingForm = () => {
     }
   };
 
+  const handleUpdateBooking = async (id, formData) => {
+    try {
+      await updateBooking(id, formData);
+      setBookingMessage('Updatering av bokning genomfört!');
+    } catch (error) {
+      console.error('Fel vid updatering av bokning:', error);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    
+    if (booking) {
+      handleUpdateBooking(id, formData);
+    } else {
+      handleCreateBooking(formData);
+    }
+  };
+
   return (
     <form onSubmit={handleSubmit}>
-      <div>
-        <label>
-          Datum:{' '}
-          <select name="date" onChange={handleChange} value={formData.date}>
-            <option value="">-- Välj ett datum --</option>
-            {bookableDates.map((date, index) => (
-              <option key={index} value={date}>
-                {date}
-              </option>
-            ))}
-          </select>
-        </label>
+      <FormBookingInfo
+        handleChange={handleChange}
+        formData={formData}
+      />
 
-        <label>
-          Tid/Sittning:{' '}
-          <select name="time" onChange={handleChange} value={formData.time}>
-            <option value="">-- Välj en sittning --</option>
-            <option value="1">Sitting 1 (Kl. 18:00 - 20:00)</option>
-            <option value="2">Sitting 2 (Kl. 21:00 - 23:00)</option>
-          </select>
-        </label>
-
-        <label>
-          Antal Gäster:{' '}
-          <select name="numberOfGuests" onChange={handleChange} value={formData.numberOfGuests}>
-            <option value="">-- Välj antal gäster --</option>
-            {[1, 2, 3, 4, 5, 6].map((number, index) => (
-              <option key={index} value={number}>
-                {number}
-              </option>
-            ))}
-          </select>
-        </label>
-      </div>
+      <FormGuestInfo
+        handleChange={handleChange}
+        formData={formData}
+      />
 
       <div>
-        <label>
-          {' '}
-          Namn:{' '}
-          <input
-            type="text"
-            name="name"
-            placeholder="Ange namn"
-            onChange={handleChange}
-            value={formData.name.name}
-          />
-        </label>
+        {booking ? (
+          <button type="submit">Updatera</button>
+        ) : (
+          <>
+            <Gdpr />
+            <button type="submit">Boka</button>
+          </>
+        )}
 
-        <label>
-          {' '}
-          E-post:{' '}
-          <input
-            type="email"
-            name="email"
-            placeholder="Ange e-post adress"
-            onChange={handleChange}
-            value={formData.name.email}
-          />
-        </label>
-
-        <label>
-          {' '}
-          Telefon:{' '}
-          <input
-            type="tel"
-            name="tel"
-            placeholder="Ange telefon-nummer"
-            onChange={handleChange}
-            value={formData.name.tel}
-          />
-        </label>
-      </div>
-
-      <div>
-        <span>
-          <input type="checkbox" /> Jag har läst och samtycker till GDPR och
-          samtliga villkor.{' '}
-          <a href="">Tryck här för att få mer information om GDPR.</a>
-        </span>
+        {useLocation().pathname.includes('admin') && (
+          <Link to={'/admin'}>
+            <button type="button">Tillbaka</button>
+          </Link>
+        )}
       </div>
 
       <div className="button-container">
@@ -146,4 +115,3 @@ const BookingForm = () => {
 };
 
 export default BookingForm;
-
