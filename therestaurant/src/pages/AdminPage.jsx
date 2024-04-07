@@ -83,9 +83,7 @@ const AdminPage = () => {
     <div>
       <h2>Admin Page</h2>
 
-      <AdminContext.Provider
-        value={[bookings, handleCreateBooking, handleDeleteBooking]}
-      >
+      <AdminContext.Provider value={[bookings, handleDeleteBooking]}>
         <Outlet />
       </AdminContext.Provider>
     </div>

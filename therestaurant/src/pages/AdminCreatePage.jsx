@@ -1,10 +1,10 @@
 import BookingForm from '../components/BookingForm';
 
-const BookingPage = () => {
+const AdminCreatePage = () => {
   return (
     <section>
       <header>
-        <h2>Boka Tid</h2>
+        <h3>Lägg till en ny bokning</h3>
       </header>
 
       <BookingForm />
@@ -12,4 +12,4 @@ const BookingPage = () => {
   );
 };
 
-export default BookingPage;
+export default AdminCreatePage;

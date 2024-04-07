@@ -32,8 +32,11 @@ const AdminEditPage = () => {
   };
 
   return (
-    <>
-      <h3>Edit Booking</h3>
+    <section>
+      <header>
+        <h3>Updatera en bokning</h3>
+      </header>
+
       {editBooking ? (
         <BookingForm
           booking={editBooking}
@@ -42,7 +45,7 @@ const AdminEditPage = () => {
       ) : (
         <h3>404 Not Found</h3>
       )}
-    </>
+    </section>
   );
 };
 

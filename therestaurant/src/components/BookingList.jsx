@@ -32,7 +32,9 @@ const BookingList = ({ bookings, handleDeleteBooking }) => {
             </span>
             <br />
 
-            <Link to={'/admin/' + id}>Edit</Link>
+            <Link to={'/admin/' + id}>
+              <button>Edit</button>
+            </Link>
 
             <button
               onClick={() => {

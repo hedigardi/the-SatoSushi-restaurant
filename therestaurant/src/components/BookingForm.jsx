@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import { createBooking, updateBooking } from '../services/bookingService';
 import FormBookingInfo from './FormBookingInfo';
 import FormGuestInfo from './FormGuestInfo';
 import Gdpr from './Gdpr';
+import { Link, useLocation } from 'react-router-dom';
 
 const BookingForm = ({ booking, id }) => {
   const [formData, setFormData] = useState(
@@ -74,13 +74,22 @@ const BookingForm = ({ booking, id }) => {
         formData={formData}
       />
 
-      {useLocation().pathname === '/booking' && <Gdpr />}
+      <div>
+        {booking ? (
+          <button type="submit">Updatera</button>
+        ) : (
+          <>
+            <Gdpr />
+            <button type="submit">Boka</button>
+          </>
+        )}
 
-      {booking ? (
-        <button type="submit">Updatera</button>
-      ) : (
-        <button type="submit">Boka</button>
-      )}
+        {useLocation().pathname.includes('admin') && (
+          <Link to={'/admin'}>
+            <button type="button">Tillbaka</button>
+          </Link>
+        )}
+      </div>
 
       {bookingMessage && <p>{bookingMessage}</p>}
     </form>

@@ -6,9 +6,8 @@ import BookingPage from './pages/BookingPage';
 import BaseLayout from './pages/BaseLayout';
 import AdminPage from './pages/AdminPage';
 import AdminOverviewPage from './pages/AdminOverviewPage';
+import AdminCreatePage from './pages/AdminCreatePage';
 import AdminEditPage from './pages/AdminEditPage';
-import CreateBooking from './pages/CreateBooking';
-
 
 export const router = createBrowserRouter([
   {
@@ -42,7 +41,7 @@ export const router = createBrowserRouter([
           },
           {
             path: '/admin/create',
-            element: <CreateBooking />,
+            element: <AdminCreatePage />,
           },
           {
             path: '/admin/:bookingId',
