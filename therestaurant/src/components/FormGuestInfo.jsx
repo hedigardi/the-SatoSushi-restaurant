@@ -12,6 +12,7 @@ const FormGuestInfo = ({ handleChange, formData }) => {
           value={formData.name.name}
         />
       </label>
+      <br />
 
       <label>
         {' '}
@@ -24,6 +25,7 @@ const FormGuestInfo = ({ handleChange, formData }) => {
           value={formData.name.email}
         />
       </label>
+      <br />
 
       <label>
         {' '}

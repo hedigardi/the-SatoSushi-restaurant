@@ -21,6 +21,7 @@ const FormBookingInfo = ({ handleChange, formData }) => {
           ))}
         </select>
       </label>
+      <br />
 
       <label>
         Tid/Sittning:{' '}
@@ -34,6 +35,7 @@ const FormBookingInfo = ({ handleChange, formData }) => {
           <option value="2">Sitting 2 (Kl. 21:00 - 23:00)</option>
         </select>
       </label>
+      <br />
 
       <label>
         Antal Gäster:{' '}
