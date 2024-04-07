@@ -27,9 +27,7 @@ const BookingList = ({ bookings, handleDeleteBooking }) => {
             <span>Date: {date}</span>
             <br />
 
-            <span>
-              Time: {time}:00 - {time + 2}:00
-            </span>
+            <span>Time: {time === 1 ? '18:00 - 20:00' : '21:00 - 23:00'}</span>
             <br />
 
             <Link to={'/admin/' + id}>
