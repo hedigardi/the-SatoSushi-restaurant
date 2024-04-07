@@ -1,14 +1,16 @@
 import { useState } from 'react';
 import bookableDates from '../utils/bookableDates';
-import { createBooking } from '../services/bookingService';
+import { createBooking, updateBooking } from '../services/bookingService';
 
-const BookingForm = () => {
-  const [formData, setFormData] = useState({
-    numberOfGuests: '',
-    name: { name: '', email: '', tel: '' },
-    date: '',
-    time: '',
-  });
+const BookingForm = ({ booking, id }) => {
+  const [formData, setFormData] = useState(
+    booking || {
+      numberOfGuests: '',
+      name: { name: '', email: '', tel: '' },
+      date: '',
+      time: '',
+    }
+  );
   const [bookingMessage, setBookingMessage] = useState('');
 
   const handleChange = (e) => {
@@ -23,12 +25,11 @@ const BookingForm = () => {
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleCreateBooking = async (formData) => {
     try {
       await createBooking(formData);
       setBookingMessage('Tack! Din bokning är skapad!');
-      
+
       setFormData({
         numberOfGuests: '',
         name: { name: '', email: '', tel: '' },
@@ -40,15 +41,40 @@ const BookingForm = () => {
     }
   };
 
+  const handleUpdateBooking = async (id, formData) => {
+    try {
+      await updateBooking(id, formData);
+      setBookingMessage('Updatering av bokning genomfört!');
+    } catch (error) {
+      console.error('Fel vid updatering av bokning:', error);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (booking) {
+      handleUpdateBooking(id, formData);
+    } else {
+      handleCreateBooking(formData);
+    }
+  };
+
   return (
     <form onSubmit={handleSubmit}>
       <div>
         <label>
           Datum:{' '}
-          <select name="date" onChange={handleChange} value={formData.date}>
+          <select
+            name="date"
+            onChange={handleChange}
+            value={formData.date}
+          >
             <option value="">-- Välj ett datum --</option>
             {bookableDates.map((date, index) => (
-              <option key={index} value={date}>
+              <option
+                key={index}
+                value={date}
+              >
                 {date}
               </option>
             ))}
@@ -57,7 +83,11 @@ const BookingForm = () => {
 
         <label>
           Tid/Sittning:{' '}
-          <select name="time" onChange={handleChange} value={formData.time}>
+          <select
+            name="time"
+            onChange={handleChange}
+            value={formData.time}
+          >
             <option value="">-- Välj en sittning --</option>
             <option value="1">Sitting 1 (Kl. 18:00 - 20:00)</option>
             <option value="2">Sitting 2 (Kl. 21:00 - 23:00)</option>
@@ -66,11 +96,18 @@ const BookingForm = () => {
 
         <label>
           Antal Gäster:{' '}
-          <select name="numberOfGuests" onChange={handleChange} value={formData.numberOfGuests}>
+          <select
+            name="numberOfGuests"
+            onChange={handleChange}
+            value={formData.numberOfGuests}
+          >
             <option value="">-- Välj antal gäster --</option>
             {[1, 2, 3, 4, 5, 6].map((number, index) => (
-              <option key={index} value={number}>
-                {number}
+              <option
+                key={index}
+                value={number}
+              >
+                {number > 1 ? number + ' personer' : number + ' person'}
               </option>
             ))}
           </select>
@@ -117,17 +154,24 @@ const BookingForm = () => {
 
       <div>
         <span>
-          <input type="checkbox" /> Jag har läst och samtycker till GDPR och
-          samtliga villkor.{' '}
+          <input
+            type="checkbox"
+            name="gdpr"
+          />{' '}
+          Jag har läst och samtycker till GDPR och samtliga villkor.{' '}
           <a href="">Tryck här för att få mer information om GDPR.</a>
         </span>
       </div>
 
-      <button type="submit">Boka</button>
+      {booking ? (
+        <button type="submit">Updatera</button>
+      ) : (
+        <button type="submit">Boka</button>
+      )}
+
       {bookingMessage && <p>{bookingMessage}</p>}
     </form>
   );
 };
 
 export default BookingForm;
-

@@ -18,9 +18,11 @@ const AdminEditPage = () => {
         date: fetchedBooking.date,
         time: Number(fetchedBooking.time),
         numberOfGuests: Number(fetchedBooking.numberOfGuests),
-        name: JSON.parse(fetchedBooking.name).name,
-        email: JSON.parse(fetchedBooking.name).email,
-        tel: JSON.parse(fetchedBooking.name).tel,
+        name: {
+          name: JSON.parse(fetchedBooking.name).name,
+          email: JSON.parse(fetchedBooking.name).email,
+          tel: JSON.parse(fetchedBooking.name).tel,
+        },
       };
 
       setEditBooking(processBooking);
@@ -32,7 +34,14 @@ const AdminEditPage = () => {
   return (
     <>
       <h3>Edit Booking</h3>
-      {editBooking && <BookingForm booking={editBooking} />}
+      {editBooking ? (
+        <BookingForm
+          booking={editBooking}
+          id={bookingId}
+        />
+      ) : (
+        <h3>404 Not Found</h3>
+      )}
     </>
   );
 };

@@ -58,10 +58,10 @@ const AdminPage = () => {
     try {
       await createBooking(
         new Booking(
-          6,
-          { name: 'Ro', email: 'do@n.n', tel: '0123654789' },
-          '2024-04-08',
-          18
+          3,
+          { name: 'Hig', email: 'you@n.n', tel: '0123654789' },
+          '2024-04-14',
+          1
         )
       );
       fetchBookings();
@@ -88,19 +88,6 @@ const AdminPage = () => {
       >
         <Outlet />
       </AdminContext.Provider>
-
-      {/* <Link to="/CreateBooking">Create New Booking</Link>
-      <BookingList
-        bookings={bookings}
-        handleEditBooking={() => {}}
-        handleDeleteBooking={() => {}}
-      />
-      {selectedBooking && (
-        <BookingForm
-          booking={selectedBooking}
-          handleSaveBooking={() => {}}
-        />
-      )} */}
     </div>
   );
 };
