@@ -1,6 +1,9 @@
 import { useState } from 'react';
-import bookableDates from '../utils/bookableDates';
+import { useLocation } from 'react-router-dom';
 import { createBooking, updateBooking } from '../services/bookingService';
+import FormBookingInfo from './FormBookingInfo';
+import FormGuestInfo from './FormGuestInfo';
+import Gdpr from './Gdpr';
 
 const BookingForm = ({ booking, id }) => {
   const [formData, setFormData] = useState(
@@ -61,107 +64,17 @@ const BookingForm = ({ booking, id }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div>
-        <label>
-          Datum:{' '}
-          <select
-            name="date"
-            onChange={handleChange}
-            value={formData.date}
-          >
-            <option value="">-- Välj ett datum --</option>
-            {bookableDates.map((date, index) => (
-              <option
-                key={index}
-                value={date}
-              >
-                {date}
-              </option>
-            ))}
-          </select>
-        </label>
+      <FormBookingInfo
+        handleChange={handleChange}
+        formData={formData}
+      />
 
-        <label>
-          Tid/Sittning:{' '}
-          <select
-            name="time"
-            onChange={handleChange}
-            value={formData.time}
-          >
-            <option value="">-- Välj en sittning --</option>
-            <option value="1">Sitting 1 (Kl. 18:00 - 20:00)</option>
-            <option value="2">Sitting 2 (Kl. 21:00 - 23:00)</option>
-          </select>
-        </label>
+      <FormGuestInfo
+        handleChange={handleChange}
+        formData={formData}
+      />
 
-        <label>
-          Antal Gäster:{' '}
-          <select
-            name="numberOfGuests"
-            onChange={handleChange}
-            value={formData.numberOfGuests}
-          >
-            <option value="">-- Välj antal gäster --</option>
-            {[1, 2, 3, 4, 5, 6].map((number, index) => (
-              <option
-                key={index}
-                value={number}
-              >
-                {number > 1 ? number + ' personer' : number + ' person'}
-              </option>
-            ))}
-          </select>
-        </label>
-      </div>
-
-      <div>
-        <label>
-          {' '}
-          Namn:{' '}
-          <input
-            type="text"
-            name="name"
-            placeholder="Ange namn"
-            onChange={handleChange}
-            value={formData.name.name}
-          />
-        </label>
-
-        <label>
-          {' '}
-          E-post:{' '}
-          <input
-            type="email"
-            name="email"
-            placeholder="Ange e-post adress"
-            onChange={handleChange}
-            value={formData.name.email}
-          />
-        </label>
-
-        <label>
-          {' '}
-          Telefon:{' '}
-          <input
-            type="tel"
-            name="tel"
-            placeholder="Ange telefon-nummer"
-            onChange={handleChange}
-            value={formData.name.tel}
-          />
-        </label>
-      </div>
-
-      <div>
-        <span>
-          <input
-            type="checkbox"
-            name="gdpr"
-          />{' '}
-          Jag har läst och samtycker till GDPR och samtliga villkor.{' '}
-          <a href="">Tryck här för att få mer information om GDPR.</a>
-        </span>
-      </div>
+      {useLocation().pathname === '/booking' && <Gdpr />}
 
       {booking ? (
         <button type="submit">Updatera</button>
