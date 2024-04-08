@@ -1,5 +1,5 @@
 import MenuCategory from '../components/MenuCategory';
-import menuList from '../utils/menuList';
+import { menuList } from '../utils/restaurant.config';
 
 const MenuPage = () => {
   return (

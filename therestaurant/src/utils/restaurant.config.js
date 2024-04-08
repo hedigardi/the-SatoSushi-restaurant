@@ -1,4 +1,6 @@
-const menuList = [
+export const availableTables = { sittingOne: 15, sittingTwo: 15 };
+
+export const menuList = [
   {
     categoryName: 'Maki',
     menuItems: [
@@ -117,5 +119,3 @@ const menuList = [
     ],
   },
 ];
-
-export default menuList;

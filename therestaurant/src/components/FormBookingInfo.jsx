@@ -6,21 +6,28 @@ const FormBookingInfo = ({ handleChange, formData }) => {
   const [sittings, setSittings] = useState({});
   const [sittingOne, setSittingOne] = useState(true);
   const [sittingTwo, setSittingTwo] = useState(true);
+  const [validDate, setValidDate] = useState(null);
 
   useEffect(() => {
     checkSittings();
   }, []);
 
   const checkSittings = async () => {
-    const list = await getAllBookings();
+    const bookings = await getAllBookings();
     const countSittings = {};
 
-    list.forEach((item) => {
-      countSittings[item.date] = countSittings[item.date] || { one: 0, two: 0 };
+    bookings.forEach((booking) => {
+      countSittings[booking.date] = countSittings[booking.date] || {
+        one: 1,
+        two: 1,
+      };
 
-      Number(item.time) === 1
-        ? (countSittings[item.date].one += 1)
-        : (countSittings[item.date].two += 1);
+      Number(booking.time) === 1
+        ? (countSittings[booking.date].one -= 1)
+        : (countSittings[booking.date].two -= 1);
+
+      countSittings[booking.date].total =
+        countSittings[booking.date].one + countSittings[booking.date].two;
     });
 
     setSittings(countSittings);
@@ -29,6 +36,7 @@ const FormBookingInfo = ({ handleChange, formData }) => {
   const checkDate = (date) => {
     setSittingOne(true);
     setSittingTwo(true);
+    setValidDate(null);
 
     if (date) {
       const currentDate = sittings[date];
@@ -36,13 +44,13 @@ const FormBookingInfo = ({ handleChange, formData }) => {
       if (currentDate) {
         console.log(currentDate);
 
-        currentDate.one < 1 ? setSittingOne(true) : setSittingOne(false);
+        currentDate.one > 0 ? setSittingOne(true) : setSittingOne(false);
 
-        currentDate.two < 1 ? setSittingTwo(true) : setSittingTwo(false);
+        currentDate.two > 0 ? setSittingTwo(true) : setSittingTwo(false);
 
-        currentDate.one >= 1 && currentDate.two >= 1
-          ? console.warn('date: full')
-          : console.log('date: bookable');
+        currentDate.one <= 0 && currentDate.two <= 0
+          ? setValidDate('Full bokat för detta datumet!')
+          : setValidDate(null);
       } else {
         console.log('no booking');
       }
@@ -73,6 +81,7 @@ const FormBookingInfo = ({ handleChange, formData }) => {
             </option>
           ))}
         </select>
+        <span>{validDate && validDate}</span>
       </label>
       <br />
 
@@ -88,11 +97,15 @@ const FormBookingInfo = ({ handleChange, formData }) => {
               ? '-- Full bokat --'
               : '-- Välj en sittning --'}
           </option>
-          {sittingOne && (
+          {sittingOne ? (
             <option value="1">Sitting 1 (Kl. 18:00 - 20:00)</option>
+          ) : (
+            <option value="">Sitting 1 (Full bokat)</option>
           )}
-          {sittingTwo && (
+          {sittingTwo ? (
             <option value="2">Sitting 2 (Kl. 21:00 - 23:00)</option>
+          ) : (
+            <option value="">Sitting 2 (Full bokat)</option>
           )}
         </select>
       </label>
