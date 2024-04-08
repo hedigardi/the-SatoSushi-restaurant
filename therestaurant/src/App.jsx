@@ -13,6 +13,7 @@ await createRestaurant('Sato Sushi');
 
 function App() {
   const [bookings, setBookings] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [isLoadingBookings, setIsLoadingBookings] = useState(false);
 
   useEffect(() => {
@@ -50,7 +51,13 @@ function App() {
   return (
     <>
       <GlobalContext.Provider
-        value={[bookings, handleDeleteBooking, isLoadingBookings]}
+        value={{
+          bookings,
+          handleDeleteBooking,
+          isLoading,
+          setIsLoading,
+          isLoadingBookings,
+        }}
       >
         <RouterProvider router={router} />
       </GlobalContext.Provider>

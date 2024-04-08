@@ -1,6 +1,11 @@
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import GlobalContext from '../context/GlobalContext';
 
-const BookingList = ({ bookings, handleDeleteBooking, isLoadingBookings }) => {
+const BookingList = () => {
+  const { bookings, handleDeleteBooking, isLoadingBookings } =
+    useContext(GlobalContext);
+
   return (
     <>
       <div className="center-content">

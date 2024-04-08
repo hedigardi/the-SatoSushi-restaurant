@@ -1,12 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { createBooking, updateBooking } from '../services/bookingService';
 import FormBookingInfo from './FormBookingInfo';
 import FormGuestInfo from './FormGuestInfo';
 import Gdpr from './Gdpr';
 import { Link, useLocation } from 'react-router-dom';
 import '../App.css';
+import GlobalContext from '../context/GlobalContext';
 
 const BookingForm = ({ booking, id }) => {
+  const { isLoading, setIsLoading } = useContext(GlobalContext);
   const [formData, setFormData] = useState(
     booking || {
       numberOfGuests: '',
@@ -16,7 +18,6 @@ const BookingForm = ({ booking, id }) => {
     }
   );
   const [bookingMessage, setBookingMessage] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
