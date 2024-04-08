@@ -7,7 +7,11 @@ const AdminPage = () => {
   const [bookings, setBookings] = useState([]);
 
   useEffect(() => {
-    fetchBookings();
+    const intervalId = setInterval(() => {
+      fetchBookings();
+    }, 1000);
+
+    return () => clearInterval(intervalId);
   }, []);
 
   const fetchBookings = async () => {

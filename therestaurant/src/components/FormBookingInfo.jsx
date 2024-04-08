@@ -11,7 +11,7 @@ const FormBookingInfo = ({ handleChange, formData }) => {
           value={formData.date}
         >
           <option value="">-- Välj ett datum --</option>
-          {bookableDates.map((date, index) => (
+          {bookableDates().map((date, index) => (
             <option
               key={index}
               value={date}
