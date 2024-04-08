@@ -4,7 +4,8 @@ import BookingList from '../components/BookingList';
 import { Link } from 'react-router-dom';
 
 const AdminOverviewPage = () => {
-  const [bookings, handleDeleteBooking] = useContext(AdminContext);
+  const [bookings, handleDeleteBooking, isLoadingBookings] =
+    useContext(AdminContext);
 
   return (
     <div>
@@ -15,6 +16,7 @@ const AdminOverviewPage = () => {
       <BookingList
         bookings={bookings}
         handleDeleteBooking={handleDeleteBooking}
+        isLoadingBookings={isLoadingBookings}
       />
     </div>
   );

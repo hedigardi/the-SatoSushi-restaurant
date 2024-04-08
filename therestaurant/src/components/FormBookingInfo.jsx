@@ -51,7 +51,7 @@ const FormBookingInfo = ({ handleChange, formData }) => {
         currentSittings.two > 0 ? setSittingTwo(true) : setSittingTwo(false);
 
         currentSittings.one <= 0 && currentSittings.two <= 0
-          ? setValidDate('Full bokat för detta datumet!')
+          ? setValidDate('Detta datumet är full bokat!')
           : setValidDate(null);
       } else {
         console.log('no booking');
@@ -103,7 +103,7 @@ const FormBookingInfo = ({ handleChange, formData }) => {
           onChange={handleChange}
           value={formData.time}
           required
-          onInvalid={(e) => e.target.setCustomValidity('Välj ett giltigt tid')}
+          onInvalid={(e) => e.target.setCustomValidity('Välj en giltigt tid')}
           onInput={(e) => e.target.setCustomValidity('')}
         >
           <option value="">

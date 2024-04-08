@@ -5,6 +5,12 @@ import AdminContext from '../context/AdminContext';
 
 const AdminPage = () => {
   const [bookings, setBookings] = useState([]);
+  const [isLoadingBookings, setIsLoadingBookings] = useState(false);
+
+  useEffect(() => {
+    if (bookings.length > 0) return;
+    setIsLoadingBookings(true);
+  });
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -18,6 +24,7 @@ const AdminPage = () => {
     try {
       const fetchedBookings = await getAllBookings();
       setBookings(fetchedBookings);
+      setIsLoadingBookings(false);
     } catch (error) {
       console.error('Error fetching all bookings:', error);
     }
@@ -36,7 +43,9 @@ const AdminPage = () => {
     <div>
       <h2>Admin Page</h2>
 
-      <AdminContext.Provider value={[bookings, handleDeleteBooking]}>
+      <AdminContext.Provider
+        value={[bookings, handleDeleteBooking, isLoadingBookings]}
+      >
         <Outlet />
       </AdminContext.Provider>
     </div>
