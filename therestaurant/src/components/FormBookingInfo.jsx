@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getAllBookings } from '../services/bookingService';
 import bookableDates from '../utils/bookableDates';
+import { availableTables } from '../utils/restaurant.config';
 
 const FormBookingInfo = ({ handleChange, formData }) => {
   const [sittings, setSittings] = useState({});
@@ -14,23 +15,23 @@ const FormBookingInfo = ({ handleChange, formData }) => {
 
   const checkSittings = async () => {
     const bookings = await getAllBookings();
-    const countSittings = {};
+    const bookedSittings = {};
 
     bookings.forEach((booking) => {
-      countSittings[booking.date] = countSittings[booking.date] || {
-        one: 1,
-        two: 1,
+      bookedSittings[booking.date] = bookedSittings[booking.date] || {
+        one: availableTables,
+        two: availableTables,
       };
 
       Number(booking.time) === 1
-        ? (countSittings[booking.date].one -= 1)
-        : (countSittings[booking.date].two -= 1);
+        ? (bookedSittings[booking.date].one -= 1)
+        : (bookedSittings[booking.date].two -= 1);
 
-      countSittings[booking.date].total =
-        countSittings[booking.date].one + countSittings[booking.date].two;
+      bookedSittings[booking.date].total =
+        bookedSittings[booking.date].one + bookedSittings[booking.date].two;
     });
 
-    setSittings(countSittings);
+    setSittings(bookedSittings);
   };
 
   const checkDate = (date) => {
@@ -39,16 +40,17 @@ const FormBookingInfo = ({ handleChange, formData }) => {
     setValidDate(null);
 
     if (date) {
-      const currentDate = sittings[date];
+      console.log(date);
+      const currentSittings = sittings[date];
 
-      if (currentDate) {
-        console.log(currentDate);
+      if (currentSittings) {
+        console.log(currentSittings);
 
-        currentDate.one > 0 ? setSittingOne(true) : setSittingOne(false);
+        currentSittings.one > 0 ? setSittingOne(true) : setSittingOne(false);
 
-        currentDate.two > 0 ? setSittingTwo(true) : setSittingTwo(false);
+        currentSittings.two > 0 ? setSittingTwo(true) : setSittingTwo(false);
 
-        currentDate.one <= 0 && currentDate.two <= 0
+        currentSittings.one <= 0 && currentSittings.two <= 0
           ? setValidDate('Full bokat för detta datumet!')
           : setValidDate(null);
       } else {
@@ -61,6 +63,7 @@ const FormBookingInfo = ({ handleChange, formData }) => {
 
   return (
     <div>
+      <p>{validDate && validDate}</p>
       <label>
         Datum:{' '}
         <select
@@ -70,18 +73,32 @@ const FormBookingInfo = ({ handleChange, formData }) => {
             checkDate(e.target.value);
           }}
           value={formData.date}
+          required
+          onInvalid={(e) =>
+            e.target.setCustomValidity('Välj ett giltigt datum')
+          }
+          onInput={(e) => e.target.setCustomValidity('')}
         >
           <option value="">-- Välj ett datum --</option>
           {bookableDates().map((date, index) => (
             <option
               key={index}
-              value={date}
+              value={
+                sittings[date] &&
+                sittings[date].one <= 0 &&
+                sittings[date].two <= 0
+                  ? ''
+                  : date
+              }
             >
-              {date}
+              {date}{' '}
+              {sittings[date] &&
+                sittings[date].one <= 0 &&
+                sittings[date].two <= 0 &&
+                '(Full bokat)'}
             </option>
           ))}
         </select>
-        <span>{validDate && validDate}</span>
       </label>
       <br />
 
@@ -91,6 +108,7 @@ const FormBookingInfo = ({ handleChange, formData }) => {
           name="time"
           onChange={handleChange}
           value={formData.time}
+          required
         >
           <option value="">
             {!sittingOne && !sittingTwo
@@ -117,6 +135,7 @@ const FormBookingInfo = ({ handleChange, formData }) => {
           name="numberOfGuests"
           onChange={handleChange}
           value={formData.numberOfGuests}
+          required
         >
           <option value="">-- Välj antal gäster --</option>
           {[1, 2, 3, 4, 5, 6].map((number, index) => (

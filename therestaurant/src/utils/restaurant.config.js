@@ -1,4 +1,4 @@
-export const availableTables = { sittingOne: 15, sittingTwo: 15 };
+export const availableTables = 1;
 
 export const menuList = [
   {
