@@ -1,4 +1,4 @@
-import { Link, createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import MenuPage from './pages/MenuPage';
 import ContactPage from './pages/ContactPage';
@@ -8,19 +8,13 @@ import AdminPage from './pages/AdminPage';
 import AdminOverviewPage from './pages/AdminOverviewPage';
 import AdminCreatePage from './pages/AdminCreatePage';
 import AdminEditPage from './pages/AdminEditPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 export const router = createBrowserRouter([
   {
     path: '/',
     element: <BaseLayout />,
-    errorElement: (
-      <section>
-        <h1>404 Not Found</h1>
-        <Link to={'/'}>
-          <button>Tillbaka</button>
-        </Link>
-      </section>
-    ),
+    errorElement: <NotFoundPage />,
     children: [
       {
         index: true,
