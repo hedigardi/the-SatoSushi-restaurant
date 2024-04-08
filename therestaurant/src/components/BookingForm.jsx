@@ -20,7 +20,7 @@ const BookingForm = ({ booking, id }) => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setBookingMessage(''); 
+      setBookingMessage('');
     }, 5000);
 
     return () => clearTimeout(timer);
@@ -62,13 +62,15 @@ const BookingForm = ({ booking, id }) => {
       setBookingMessage('Updatering av bokning genomfört!');
     } catch (error) {
       console.error('Fel vid updatering av bokning:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    
+
     if (booking) {
       handleUpdateBooking(id, formData);
     } else {

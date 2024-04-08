@@ -83,19 +83,13 @@ const FormBookingInfo = ({ handleChange, formData }) => {
           {bookableDates().map((date, index) => (
             <option
               key={index}
-              value={
-                sittings[date] &&
-                sittings[date].one <= 0 &&
-                sittings[date].two <= 0
-                  ? ''
-                  : date
-              }
+              value={date}
             >
-              {date}{' '}
+              {date}
               {sittings[date] &&
                 sittings[date].one <= 0 &&
                 sittings[date].two <= 0 &&
-                '(Full bokat)'}
+                ' (Full bokat)'}
             </option>
           ))}
         </select>
@@ -109,22 +103,22 @@ const FormBookingInfo = ({ handleChange, formData }) => {
           onChange={handleChange}
           value={formData.time}
           required
+          onInvalid={(e) => e.target.setCustomValidity('Välj ett giltigt tid')}
+          onInput={(e) => e.target.setCustomValidity('')}
         >
           <option value="">
             {!sittingOne && !sittingTwo
               ? '-- Full bokat --'
               : '-- Välj en sittning --'}
           </option>
-          {sittingOne ? (
-            <option value="1">Sitting 1 (Kl. 18:00 - 20:00)</option>
-          ) : (
-            <option value="">Sitting 1 (Full bokat)</option>
-          )}
-          {sittingTwo ? (
-            <option value="2">Sitting 2 (Kl. 21:00 - 23:00)</option>
-          ) : (
-            <option value="">Sitting 2 (Full bokat)</option>
-          )}
+
+          <option value={sittingOne ? 1 : ''}>
+            Sitting 1 ({sittingOne ? 'Kl. 18:00 - 20:00' : 'Full bokat'})
+          </option>
+
+          <option value={sittingTwo ? 2 : ''}>
+            Sitting 2 ({sittingTwo ? 'Kl. 21:00 - 23:00' : 'Full bokat'})
+          </option>
         </select>
       </label>
       <br />
@@ -136,6 +130,8 @@ const FormBookingInfo = ({ handleChange, formData }) => {
           onChange={handleChange}
           value={formData.numberOfGuests}
           required
+          onInvalid={(e) => e.target.setCustomValidity('Välj antal personer')}
+          onInput={(e) => e.target.setCustomValidity('')}
         >
           <option value="">-- Välj antal gäster --</option>
           {[1, 2, 3, 4, 5, 6].map((number, index) => (
