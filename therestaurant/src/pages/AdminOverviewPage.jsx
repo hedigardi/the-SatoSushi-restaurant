@@ -8,14 +8,14 @@ const AdminOverviewPage = () => {
 
   return (
     <div>
+      <Link to={'/admin/create'}>
+        <button>Skapa ny bokning</button>
+      </Link>
+
       <BookingList
         bookings={bookings}
         handleDeleteBooking={handleDeleteBooking}
       />
-
-      <Link to={'/admin/create'}>
-        <button>Skapa ny bokning</button>
-      </Link>
     </div>
   );
 };
