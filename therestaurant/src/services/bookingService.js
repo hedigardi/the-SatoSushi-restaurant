@@ -17,29 +17,44 @@ if (window.ethereum) {
   );
 }
 
+const getAll = async (name, getCount) => {
+  const count = getCount;
+  const temp = [];
+
+  for (let i = 0; i <= count; ++i) {
+    const item = await readContract[name](i);
+    if (item.id > 0) temp.push(item);
+  }
+
+  return temp;
+};
+
 export const getRestaurantCount = async () => {
   const count = await readContract['restaurantCount']();
   return Number(count);
 };
 
 export const createRestaurant = async (name) => {
-  const count = await getRestaurantCount();
-  const temp = [];
+  const input = ['restaurants', await getRestaurantCount()];
+  const setRestaurantId = (list, name) => {
+    list.find((restaurant) => {
+      if (restaurant.name === name) restaurantId = Number(restaurant.id);
+    });
+  };
 
-  for (let i = 0; i <= count; ++i) {
-    const restaurant = await readContract['restaurants'](i);
-    if (restaurant.id > 0) temp.push(restaurant);
-  }
-
-  temp.find((restaurant) => {
-    if (restaurant.name === name) restaurantId = Number(restaurant.id);
-  });
+  setRestaurantId(await getAll(input[0], input[1]), name);
 
   if (!restaurantId) {
-    await writeContract.createRestaurant(name);
+    const result = await writeContract.createRestaurant(name);
+    await result.wait();
+
+    setRestaurantId(await getAll(input[0], input[1]), name);
+
     console.log(`Restaurant "${name}" has been created`);
+    console.log(restaurantId);
   } else {
     console.log('Restaurant already exists');
+    console.log(restaurantId);
   }
 };
 
@@ -49,15 +64,7 @@ export const getBookingCount = async () => {
 };
 
 export const getAllBookings = async () => {
-  const count = await getBookingCount();
-  const temp = [];
-
-  for (let i = 0; i <= count; ++i) {
-    const booking = await readContract['bookings'](i);
-    if (booking.id > 0) temp.push(booking);
-  }
-
-  return temp;
+  return await getAll('bookings', await getBookingCount());
 };
 
 export const getBooking = async (id) => {
