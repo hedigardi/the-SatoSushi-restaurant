@@ -4,7 +4,6 @@ import { abi, contractAddress } from '../utils/config';
 let provider;
 let readContract;
 let writeContract;
-let restaurantId;
 
 if (window.ethereum) {
   provider = new ethers.BrowserProvider(window.ethereum);
@@ -35,27 +34,30 @@ export const getRestaurantCount = async () => {
 };
 
 export const createRestaurant = async (name) => {
-  const input = ['restaurants', await getRestaurantCount()];
+  let restaurantId = 0;
+
+  const input = ['restaurants', async () => await getRestaurantCount()];
   const setRestaurantId = (list, name) => {
     list.find((restaurant) => {
       if (restaurant.name === name) restaurantId = Number(restaurant.id);
     });
   };
 
-  setRestaurantId(await getAll(input[0], input[1]), name);
+  setRestaurantId(await getAll(input[0], await input[1]()), name);
 
   if (!restaurantId) {
     const result = await writeContract.createRestaurant(name);
     await result.wait();
 
-    setRestaurantId(await getAll(input[0], input[1]), name);
+    setRestaurantId(await getAll(input[0], await input[1]()), name);
 
     console.log(`Restaurant "${name}" has been created`);
-    console.log(restaurantId);
   } else {
     console.log('Restaurant already exists');
-    console.log(restaurantId);
   }
+
+  console.log('current:', restaurantId);
+  return restaurantId;
 };
 
 export const getBookingCount = async () => {
@@ -71,8 +73,8 @@ export const getBooking = async (id) => {
   return await readContract['bookings'](id);
 };
 
-export const createBooking = async (newBooking) => {
-  console.log(restaurantId);
+export const createBooking = async (restaurantId, newBooking) => {
+  console.log('create:', restaurantId);
   return await writeContract.createBooking(
     newBooking.numberOfGuests,
     JSON.stringify(newBooking.name),
