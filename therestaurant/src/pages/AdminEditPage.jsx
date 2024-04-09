@@ -14,7 +14,8 @@ const AdminEditPage = () => {
   const fetchBooking = async () => {
     try {
       const fetchedBooking = await getBooking(bookingId);
-      const processBooking = {
+
+      setEditBooking({
         date: fetchedBooking.date,
         time: Number(fetchedBooking.time),
         numberOfGuests: Number(fetchedBooking.numberOfGuests),
@@ -23,9 +24,7 @@ const AdminEditPage = () => {
           email: JSON.parse(fetchedBooking.name).email,
           tel: JSON.parse(fetchedBooking.name).tel,
         },
-      };
-
-      setEditBooking(processBooking);
+      });
     } catch (error) {
       console.error('Error fetching booking by id:', error);
     }

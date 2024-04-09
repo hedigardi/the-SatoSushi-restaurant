@@ -55,7 +55,13 @@ const FormBookingInfo = ({ handleChange, formData, sittings }) => {
           {bookableDates().map((date, index) => (
             <option
               key={index}
-              value={date}
+              value={
+                sittings[date] &&
+                sittings[date].one <= 0 &&
+                sittings[date].two <= 0
+                  ? ''
+                  : date
+              }
             >
               {date}
               {sittings[date] &&
