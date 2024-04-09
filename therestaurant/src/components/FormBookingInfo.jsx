@@ -1,37 +1,10 @@
-import { useContext, useEffect, useState } from 'react';
+import { useState } from 'react';
 import bookableDates from '../utils/bookableDates';
-import { availableTables } from '../utils/restaurant.config';
-import GlobalContext from '../context/GlobalContext';
 
-const FormBookingInfo = ({ handleChange, formData }) => {
-  const { bookings } = useContext(GlobalContext);
-  const [sittings, setSittings] = useState({});
+const FormBookingInfo = ({ handleChange, formData, sittings }) => {
   const [sittingOne, setSittingOne] = useState(true);
   const [sittingTwo, setSittingTwo] = useState(true);
   const [validDate, setValidDate] = useState(null);
-
-  useEffect(() => {
-    const checkSittings = async () => {
-      const bookedSittings = {};
-
-      bookings.forEach((booking) => {
-        bookedSittings[booking.date] = bookedSittings[booking.date] || {
-          one: availableTables,
-          two: availableTables,
-        };
-
-        Number(booking.time) === 1
-          ? (bookedSittings[booking.date].one -= 1)
-          : (bookedSittings[booking.date].two -= 1);
-
-        bookedSittings[booking.date].total =
-          bookedSittings[booking.date].one + bookedSittings[booking.date].two;
-      });
-
-      setSittings(bookedSittings);
-    };
-    checkSittings();
-  }, [bookings]);
 
   const checkDate = (date) => {
     setSittingOne(true);

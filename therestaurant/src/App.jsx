@@ -15,10 +15,12 @@ function App() {
   const [bookings, setBookings] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingBookings, setIsLoadingBookings] = useState(false);
+  const [isLoadingForm, setIsLoadingForm] = useState(false);
 
   useEffect(() => {
     if (bookings.length > 0) return;
     setIsLoadingBookings(true);
+    setIsLoadingForm(true);
   }, [bookings]);
 
   useEffect(() => {
@@ -57,6 +59,8 @@ function App() {
           isLoading,
           setIsLoading,
           isLoadingBookings,
+          isLoadingForm,
+          setIsLoadingForm,
         }}
       >
         <RouterProvider router={router} />
