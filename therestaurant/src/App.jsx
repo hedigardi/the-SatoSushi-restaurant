@@ -7,7 +7,7 @@ import {
   getAllBookings,
 } from './services/bookingService.js';
 import GlobalContext from './context/GlobalContext.js';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 await createRestaurant('Sato Sushi');
 
@@ -17,6 +17,29 @@ function App() {
   const [isLoadingBookings, setIsLoadingBookings] = useState(false);
   const [isLoadingForm, setIsLoadingForm] = useState(false);
 
+  const [readContract, setReadContract] = useState({ getAllBookings });
+  const [writeContract, setWriteContract] = useState({ deleteBooking });
+
+  const fetchBookings = useCallback(async () => {
+    try {
+      const result = await readContract.getAllBookings();
+      setBookings(result);
+      setIsLoadingBookings(false);
+    } catch (error) {
+      console.error('Error fetching all bookings:', error);
+    }
+  }, [readContract]);
+
+  const handleDeleteBooking = async (id) => {
+    try {
+      const result = await writeContract.deleteBooking(id);
+      await result.wait();
+      fetchBookings();
+    } catch (error) {
+      console.error('Error deleting booking:', error);
+    }
+  };
+
   useEffect(() => {
     if (bookings.length > 0) return;
     setIsLoadingBookings(true);
@@ -24,31 +47,10 @@ function App() {
   }, [bookings]);
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
+    if (readContract) {
       fetchBookings();
-    }, 1000);
-
-    return () => clearInterval(intervalId);
-  }, []);
-
-  const fetchBookings = async () => {
-    try {
-      const fetchedBookings = await getAllBookings();
-      setBookings(fetchedBookings);
-      setIsLoadingBookings(false);
-    } catch (error) {
-      console.error('Error fetching all bookings:', error);
     }
-  };
-
-  const handleDeleteBooking = async (id) => {
-    try {
-      await deleteBooking(id);
-      fetchBookings();
-    } catch (error) {
-      console.error('Error deleting booking:', error);
-    }
-  };
+  }, [readContract, fetchBookings]);
 
   return (
     <>
@@ -59,6 +61,7 @@ function App() {
           isLoading,
           setIsLoading,
           isLoadingBookings,
+          setIsLoadingBookings,
           isLoadingForm,
           setIsLoadingForm,
         }}
