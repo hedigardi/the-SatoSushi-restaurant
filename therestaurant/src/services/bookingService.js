@@ -27,11 +27,16 @@ export const createRestaurant = async (name) => {
   }
 };
 
-export const getAllBookings = async () => {
+export const getBookingCount = async () => {
   const count = await readContract['bookingCount']();
+  return Number(count);
+};
+
+export const getAllBookings = async () => {
+  const count = await getBookingCount();
   const temp = [];
 
-  for (let i = 0; i <= Number(count); ++i) {
+  for (let i = 0; i <= count; ++i) {
     const booking = await readContract['bookings'](i);
     if (booking.id > 0) temp.push(booking);
   }
@@ -41,11 +46,6 @@ export const getAllBookings = async () => {
 
 export const getBooking = async (id) => {
   return await readContract['bookings'](id);
-};
-
-export const getBookingCount = async () => {
-  const count = await readContract['bookingCount']();
-  return Number(count);
 };
 
 export const createBooking = async (newBooking) => {

@@ -9,8 +9,18 @@ import { availableTables } from '../utils/restaurant.config';
 import '../App.css';
 
 const BookingForm = ({ booking, id }) => {
-  const { bookings, isLoading, setIsLoading, isLoadingForm, setIsLoadingForm } =
-    useContext(GlobalContext);
+  const {
+    bookings,
+    bookingMessage,
+    setBookingMessage,
+
+    isLoading,
+    setIsLoading,
+    isLoadingForm,
+
+    handleUpdateBooking,
+    handleCreateBooking,
+  } = useContext(GlobalContext);
   const [formData, setFormData] = useState(
     booking || {
       numberOfGuests: '',
@@ -19,9 +29,7 @@ const BookingForm = ({ booking, id }) => {
       time: '',
     }
   );
-  const [bookingMessage, setBookingMessage] = useState('');
   const [sittings, setSittings] = useState({});
-
   const locationPath = useLocation().pathname;
 
   useEffect(() => {
@@ -30,7 +38,7 @@ const BookingForm = ({ booking, id }) => {
     }, 5000);
 
     return () => clearTimeout(timer);
-  }, [bookingMessage]);
+  }, [bookingMessage, setBookingMessage]);
 
   useEffect(() => {
     const checkSittings = async () => {
@@ -51,10 +59,9 @@ const BookingForm = ({ booking, id }) => {
       });
 
       setSittings(bookedSittings);
-      setIsLoadingForm(false);
     };
     checkSittings();
-  }, [bookings, setIsLoadingForm]);
+  }, [bookings]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -68,35 +75,6 @@ const BookingForm = ({ booking, id }) => {
     }
   };
 
-  const handleCreateBooking = async (formData) => {
-    try {
-      await createBooking(formData);
-      setBookingMessage('Tack! Din bokning är skapad!');
-
-      setFormData({
-        numberOfGuests: '',
-        name: { name: '', email: '', tel: '' },
-        date: '',
-        time: '',
-      });
-    } catch (error) {
-      console.error('Fel vid skapande av bokning:', error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleUpdateBooking = async (id, formData) => {
-    try {
-      await updateBooking(id, formData);
-      setBookingMessage('Updatering av bokning genomfört!');
-    } catch (error) {
-      console.error('Fel vid updatering av bokning:', error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -104,7 +82,7 @@ const BookingForm = ({ booking, id }) => {
     if (booking) {
       handleUpdateBooking(id, formData);
     } else {
-      handleCreateBooking(formData);
+      handleCreateBooking(formData, setFormData);
     }
   };
 
