@@ -1,9 +1,10 @@
 import { ethers } from 'ethers';
 import { abi, contractAddress } from '../utils/config';
 
-let provider;
-let readContract;
-let writeContract;
+let provider = null;
+let readContract = null;
+let writeContract = null;
+let restaurantId = 0;
 
 if (window.ethereum) {
   provider = new ethers.BrowserProvider(window.ethereum);
@@ -34,8 +35,6 @@ export const getRestaurantCount = async () => {
 };
 
 export const createRestaurant = async (name) => {
-  let restaurantId = 0;
-
   const input = ['restaurants', async () => await getRestaurantCount()];
   const setRestaurantId = (list, name) => {
     list.find((restaurant) => {
@@ -73,7 +72,7 @@ export const getBooking = async (id) => {
   return await readContract['bookings'](id);
 };
 
-export const createBooking = async (restaurantId, newBooking) => {
+export const createBooking = async (newBooking) => {
   console.log('create:', restaurantId);
   return await writeContract.createBooking(
     newBooking.numberOfGuests,

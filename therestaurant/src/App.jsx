@@ -13,11 +13,9 @@ import {
 import GlobalContext from './context/GlobalContext.js';
 import { useCallback, useEffect, useState } from 'react';
 
-const currentRestaurant = await createRestaurant('Sato Sushi');
+await createRestaurant('Sato Sushi');
 
 function App() {
-  const [restaurantId, setRestaurantId] = useState(currentRestaurant);
-
   const [bookings, setBookings] = useState([]);
   const [bookingMessage, setBookingMessage] = useState('');
 
@@ -62,7 +60,7 @@ function App() {
 
   const handleCreateBooking = async (formData, setFormData) => {
     try {
-      const result = await writeContract.createBooking(restaurantId, formData);
+      const result = await writeContract.createBooking(formData);
       await result.wait();
 
       setFormData({
