@@ -36,6 +36,7 @@ export const getRestaurantCount = async () => {
 
 export const createRestaurant = async (name) => {
   const input = ['restaurants', async () => await getRestaurantCount()];
+
   const setRestaurantId = (list, name) => {
     list.find((restaurant) => {
       if (restaurant.name === name) restaurantId = Number(restaurant.id);

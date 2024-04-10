@@ -1,4 +1,4 @@
-import './App.css';
+import { useCallback, useEffect, useState } from 'react';
 import { RouterProvider } from 'react-router-dom';
 import { router } from './Router.jsx';
 import {
@@ -11,11 +11,15 @@ import {
   updateBooking,
 } from './services/bookingService.js';
 import GlobalContext from './context/GlobalContext.js';
-import { useCallback, useEffect, useState } from 'react';
+import './App.css';
 
-await createRestaurant('Sato Sushi');
+if (window.ethereum) {
+  await createRestaurant('Sato Sushi');
+}
 
 function App() {
+  const [metamask, setMetamask] = useState(window.ethereum);
+
   const [bookings, setBookings] = useState([]);
   const [bookingMessage, setBookingMessage] = useState('');
 
@@ -106,6 +110,12 @@ function App() {
 
   return (
     <>
+      {!metamask && (
+        <div>
+          <p>Du saknar METAMASK!</p>
+        </div>
+      )}
+
       <GlobalContext.Provider
         value={{
           bookings,
@@ -118,9 +128,6 @@ function App() {
           setIsLoadingBookings,
           isLoadingForm,
           setIsLoadingForm,
-
-          readContract,
-          writeContract,
 
           handleCreateBooking,
           handleDeleteBooking,

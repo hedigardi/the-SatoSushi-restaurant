@@ -4,7 +4,7 @@ import Footer from '../components/Footer';
 
 const BaseLayout = () => {
   return (
-    <div>
+    <>
       <Header />
 
       <main>
@@ -12,7 +12,7 @@ const BaseLayout = () => {
       </main>
 
       <Footer />
-    </div>
+    </>
   );
 };
 

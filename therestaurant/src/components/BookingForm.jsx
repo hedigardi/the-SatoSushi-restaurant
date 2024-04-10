@@ -1,12 +1,10 @@
 import { useState, useEffect, useContext } from 'react';
-import { createBooking, updateBooking } from '../services/bookingService';
+import { Link, useLocation } from 'react-router-dom';
+import { availableTables } from '../utils/restaurant.config';
+import GlobalContext from '../context/GlobalContext';
 import FormBookingInfo from './FormBookingInfo';
 import FormGuestInfo from './FormGuestInfo';
 import Gdpr from './Gdpr';
-import { Link, useLocation } from 'react-router-dom';
-import GlobalContext from '../context/GlobalContext';
-import { availableTables } from '../utils/restaurant.config';
-import '../App.css';
 
 const BookingForm = ({ booking, id }) => {
   const {
@@ -33,6 +31,8 @@ const BookingForm = ({ booking, id }) => {
   const locationPath = useLocation().pathname;
 
   useEffect(() => {
+    console.log('message');
+
     const timer = setTimeout(() => {
       setBookingMessage('');
     }, 5000);
