@@ -133,7 +133,8 @@ p.about_us {
   object-fit: cover;
 }
 
-.menu {}
+.menu {
+}
 
 .category {
   margin: 20px 0;
@@ -185,6 +186,18 @@ p.about_us {
   height: 20px;
   animation: spin 1s linear infinite;
   margin-top: 10px;
+}
+
+.big-spinner {
+  border-width: 12px;
+  width: 60px;
+  height: 60px;
+}
+
+.center-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @keyframes spin {

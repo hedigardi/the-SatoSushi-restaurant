@@ -1,22 +1,95 @@
+import { useEffect, useState } from 'react';
+import { getAllBookings } from '../services/bookingService';
 import bookableDates from '../utils/bookableDates';
+import { availableTables } from '../utils/restaurant.config';
 
 const FormBookingInfo = ({ handleChange, formData }) => {
+  const [sittings, setSittings] = useState({});
+  const [sittingOne, setSittingOne] = useState(true);
+  const [sittingTwo, setSittingTwo] = useState(true);
+  const [validDate, setValidDate] = useState(null);
+
+  useEffect(() => {
+    checkSittings();
+  }, []);
+
+  const checkSittings = async () => {
+    const bookings = await getAllBookings();
+    const bookedSittings = {};
+
+    bookings.forEach((booking) => {
+      bookedSittings[booking.date] = bookedSittings[booking.date] || {
+        one: availableTables,
+        two: availableTables,
+      };
+
+      Number(booking.time) === 1
+        ? (bookedSittings[booking.date].one -= 1)
+        : (bookedSittings[booking.date].two -= 1);
+
+      bookedSittings[booking.date].total =
+        bookedSittings[booking.date].one + bookedSittings[booking.date].two;
+    });
+
+    setSittings(bookedSittings);
+  };
+
+  const checkDate = (date) => {
+    setSittingOne(true);
+    setSittingTwo(true);
+    setValidDate(null);
+
+    if (date) {
+      console.log(date);
+      const currentSittings = sittings[date];
+
+      if (currentSittings) {
+        console.log(currentSittings);
+
+        currentSittings.one > 0 ? setSittingOne(true) : setSittingOne(false);
+
+        currentSittings.two > 0 ? setSittingTwo(true) : setSittingTwo(false);
+
+        currentSittings.one <= 0 && currentSittings.two <= 0
+          ? setValidDate('Detta datumet är full bokat!')
+          : setValidDate(null);
+      } else {
+        console.log('no booking');
+      }
+    } else {
+      console.warn('no date');
+    }
+  };
+
   return (
     <div>
+      <p>{validDate && validDate}</p>
       <label>
         Datum:{' '}
         <select
           name="date"
-          onChange={handleChange}
+          onChange={(e) => {
+            handleChange(e);
+            checkDate(e.target.value);
+          }}
           value={formData.date}
+          required
+          onInvalid={(e) =>
+            e.target.setCustomValidity('Välj ett giltigt datum')
+          }
+          onInput={(e) => e.target.setCustomValidity('')}
         >
           <option value="">-- Välj ett datum --</option>
-          {bookableDates.map((date, index) => (
+          {bookableDates().map((date, index) => (
             <option
               key={index}
               value={date}
             >
               {date}
+              {sittings[date] &&
+                sittings[date].one <= 0 &&
+                sittings[date].two <= 0 &&
+                ' (Full bokat)'}
             </option>
           ))}
         </select>
@@ -29,10 +102,23 @@ const FormBookingInfo = ({ handleChange, formData }) => {
           name="time"
           onChange={handleChange}
           value={formData.time}
+          required
+          onInvalid={(e) => e.target.setCustomValidity('Välj en giltigt tid')}
+          onInput={(e) => e.target.setCustomValidity('')}
         >
-          <option value="">-- Välj en sittning --</option>
-          <option value="1">Sitting 1 (Kl. 18:00 - 20:00)</option>
-          <option value="2">Sitting 2 (Kl. 21:00 - 23:00)</option>
+          <option value="">
+            {!sittingOne && !sittingTwo
+              ? '-- Full bokat --'
+              : '-- Välj en sittning --'}
+          </option>
+
+          <option value={sittingOne ? 1 : ''}>
+            Sitting 1 ({sittingOne ? 'Kl. 18:00 - 20:00' : 'Full bokat'})
+          </option>
+
+          <option value={sittingTwo ? 2 : ''}>
+            Sitting 2 ({sittingTwo ? 'Kl. 21:00 - 23:00' : 'Full bokat'})
+          </option>
         </select>
       </label>
       <br />
@@ -43,6 +129,9 @@ const FormBookingInfo = ({ handleChange, formData }) => {
           name="numberOfGuests"
           onChange={handleChange}
           value={formData.numberOfGuests}
+          required
+          onInvalid={(e) => e.target.setCustomValidity('Välj antal personer')}
+          onInput={(e) => e.target.setCustomValidity('')}
         >
           <option value="">-- Välj antal gäster --</option>
           {[1, 2, 3, 4, 5, 6].map((number, index) => (

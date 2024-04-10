@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { Link, createBrowserRouter } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import MenuPage from './pages/MenuPage';
 import ContactPage from './pages/ContactPage';
@@ -13,7 +13,14 @@ export const router = createBrowserRouter([
   {
     path: '/',
     element: <BaseLayout />,
-    errorElement: <h1>404 Not Found</h1>,
+    errorElement: (
+      <section>
+        <h1>404 Not Found</h1>
+        <Link to={'/'}>
+          <button>Tillbaka</button>
+        </Link>
+      </section>
+    ),
     children: [
       {
         index: true,
