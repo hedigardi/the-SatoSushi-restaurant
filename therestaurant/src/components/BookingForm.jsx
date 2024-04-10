@@ -108,7 +108,7 @@ const BookingForm = ({ editBooking, bookingId }) => {
 
           <div>
             {editBooking ? (
-              <button type="submit">Updatera</button>
+              <button type="submit">Uppdatera</button>
             ) : (
               <>
                 <Gdpr />

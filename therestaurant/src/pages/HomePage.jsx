@@ -29,7 +29,7 @@ const HomePage = () => {
           </article>
         </div>
 
-        <div>
+        <div className="welcome">
           <p>
             Välkommen till SatoSuShi, din främsta källa för allt som rör sushi.
           </p>

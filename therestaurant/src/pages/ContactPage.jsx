@@ -2,7 +2,7 @@ import ContactForm from '../components/ContactForm';
 
 const ContactPage = () => {
   return (
-    <div>
+    <div className="contact-wrapper">
       <section>
         <header>
           <h2>Kontaktuppgifter</h2>

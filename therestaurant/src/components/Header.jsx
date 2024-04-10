@@ -1,17 +1,24 @@
-import { NavLink } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, NavLink } from 'react-router-dom';
 
 const Header = () => {
+  const [toggleMenu, setToggleMenu] = useState(false);
+
+  const handleMenuClick = () => {
+    setToggleMenu(false);
+  };
+
   return (
     <header>
       <div className="header-container">
         <div className="hat">
-          <a href="/">
+          <Link to={'/'}>
             <img
               className="logo"
-              src="src/assets/images/logo_transparent_light.png"
+              src="/src/assets/images/logo_transparent_light.png"
               alt="SatoSuShi logo"
             />
-          </a>
+          </Link>
         </div>
 
         <div className="navigation">
@@ -19,55 +26,69 @@ const Header = () => {
             type="checkbox"
             className="navigation-checkbox"
             id="navi-toggle"
+            checked={toggleMenu}
+            onClick={() => {
+              setToggleMenu(!toggleMenu);
+            }}
           />
           <label
-            for="navi-toggle"
+            htmlFor="navi-toggle"
             className="navigation-button"
           >
             <span className="navigation-icon">&nbsp;</span>
           </label>
           <div className="navigation-background">&nbsp;</div>
+
           <nav className="navigation-nav">
             <ul className="navigation-list">
               <li className="navigation-item">
-                <a
-                  href=""
+                <NavLink
+                  to={'/'}
                   className="navigation-link"
+                  onClick={handleMenuClick}
                 >
-                  <NavLink to={'/'}>Om oss</NavLink>
-                </a>
+                  Om oss
+                </NavLink>
               </li>
+
               <li className="navigation-item">
-                <a
-                  href=""
+                <NavLink
+                  to={'/menu'}
                   className="navigation-link"
+                  onClick={handleMenuClick}
                 >
-                  <NavLink to={'/menu'}>Meny</NavLink>
-                </a>
+                  Meny
+                </NavLink>
               </li>
+
               <li className="navigation-item">
-                <a
-                  href=""
+                <NavLink
+                  to={'/booking'}
                   className="navigation-link"
+                  onClick={handleMenuClick}
                 >
-                  <NavLink to={'/booking'}>Boka bord</NavLink>
-                </a>
+                  Boka bord
+                </NavLink>
               </li>
+
               <li className="navigation-item">
-                <a
-                  href=""
+                <NavLink
+                  to={'/contact'}
                   className="navigation-link"
+                  onClick={handleMenuClick}
                 >
-                  <NavLink to={'/contact'}>Kontakt</NavLink>
-                </a>
+                  Kontakt
+                </NavLink>
               </li>
+
               <li className="navigation-item">
-                <a
-                  href=""
+                <NavLink
+                  to={'/admin'}
                   className="navigation-link"
+                  onClick={handleMenuClick}
                 >
-                  <NavLink to={'/admin'}>Admin</NavLink>
-                </a>
+                  Admin
+                </NavLink>
               </li>
             </ul>
           </nav>

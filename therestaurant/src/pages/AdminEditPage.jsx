@@ -15,7 +15,7 @@ const AdminEditPage = () => {
   return (
     <section>
       <header>
-        <h3>Updatera en bokning</h3>
+        <h3>Uppdatera en bokning</h3>
       </header>
 
       {editBooking ? (
