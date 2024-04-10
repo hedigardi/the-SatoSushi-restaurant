@@ -3,12 +3,12 @@ export const availableTables = 1;
 export const formValidationMessages = {
   booked: 'Fullbokat',
   date: 'Välj ett giltigt datum',
-  time: 'Välj en giltigt tid',
+  time: 'Välj en giltig tid',
   guests: 'Välj antal personer',
-  name: 'Fyll in ditt namn',
-  email: 'Fyll in din e-mail',
-  tel: 'Fyll in ditt telefonnummer',
-  gdpr: '',
+  name: 'Fyll i ditt namn',
+  email: 'Fyll i din e-post',
+  tel: 'Fyll i ditt telefonnummer',
+  gdpr: 'Godkänn GDPR för att fortsätta',
 };
 
 export const menuList = [

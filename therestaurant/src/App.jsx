@@ -39,15 +39,16 @@ function App() {
     setIsLoadingBookings(true);
   }, [bookings]);
 
-  const fetchBookings = useCallback(async () => {
+  const updateBookings = useCallback(async () => {
     try {
       const result = await readContract.getAllBookings();
       setBookings(result);
-      setIsLoadingBookings(false);
+
+      isLoadingBookings && setIsLoadingBookings(false);
     } catch (error) {
       console.error('Error fetching all bookings:', error);
     }
-  }, [readContract]);
+  }, [isLoadingBookings, readContract]);
 
   useEffect(() => {
     const setupProviders = async () => {
@@ -70,9 +71,9 @@ function App() {
 
   useEffect(() => {
     if (readContract) {
-      fetchBookings();
+      updateBookings();
     }
-  }, [readContract, fetchBookings]);
+  }, [readContract, updateBookings]);
 
   const handleCreateBooking = async (formData, setFormData) => {
     try {
@@ -87,7 +88,7 @@ function App() {
       });
 
       setBookingMessage('Tack! Din bokning är skapad!');
-      fetchBookings();
+      updateBookings();
     } catch (error) {
       console.error('Error creating a booking:', error);
     } finally {
@@ -100,7 +101,7 @@ function App() {
       const result = await writeContract.deleteBooking(id);
       await result.wait();
 
-      fetchBookings();
+      updateBookings();
     } catch (error) {
       console.error(`Error deleting booking with ${id}:`, error);
     }
@@ -112,11 +113,30 @@ function App() {
       await result.wait();
 
       setBookingMessage('Updatering av bokning genomfört!');
-      fetchBookings();
+      updateBookings();
     } catch (error) {
       console.error(`Error updating booking with ${id}:`, error);
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const fetchBooking = async (bookingId, setEditBooking) => {
+    try {
+      const fetchedBooking = await getBooking(bookingId);
+
+      setEditBooking({
+        date: fetchedBooking.date,
+        time: Number(fetchedBooking.time),
+        numberOfGuests: Number(fetchedBooking.numberOfGuests),
+        name: {
+          name: JSON.parse(fetchedBooking.name).name,
+          email: JSON.parse(fetchedBooking.name).email,
+          tel: JSON.parse(fetchedBooking.name).tel,
+        },
+      });
+    } catch (error) {
+      console.error('Error fetching booking by id:', error);
     }
   };
 
@@ -142,6 +162,8 @@ function App() {
           handleCreateBooking,
           handleDeleteBooking,
           handleUpdateBooking,
+
+          fetchBooking,
 
           availableTables,
           formValidationMessages,

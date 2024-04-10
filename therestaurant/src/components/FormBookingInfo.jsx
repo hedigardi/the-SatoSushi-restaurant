@@ -13,20 +13,13 @@ const FormBookingInfo = ({ handleChange, formData, sittings }) => {
     setSittingTwo(true);
 
     if (date) {
-      console.info(date);
       const currentSittings = sittings[date];
 
       if (currentSittings) {
-        console.info(currentSittings);
-
         currentSittings.one > 0 ? setSittingOne(true) : setSittingOne(false);
 
         currentSittings.two > 0 ? setSittingTwo(true) : setSittingTwo(false);
-      } else {
-        console.info('no booking');
       }
-    } else {
-      console.warn('no date');
     }
   };
 
