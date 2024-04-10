@@ -1,7 +1,10 @@
+import { useContext } from 'react';
+import GlobalContext from '../context/GlobalContext';
 import MenuCategory from '../components/MenuCategory';
-import { menuList } from '../utils/restaurant.config';
 
 const MenuPage = () => {
+  const { menuList } = useContext(GlobalContext);
+
   return (
     <div className="column">
       <div className="content">

@@ -1,12 +1,11 @@
 import { useState, useEffect, useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { availableTables } from '../utils/restaurant.config';
 import GlobalContext from '../context/GlobalContext';
 import FormBookingInfo from './FormBookingInfo';
 import FormGuestInfo from './FormGuestInfo';
 import Gdpr from './Gdpr';
 
-const BookingForm = ({ editBooking, id }) => {
+const BookingForm = ({ editBooking, bookingId }) => {
   const {
     bookings,
     bookingMessage,
@@ -18,6 +17,8 @@ const BookingForm = ({ editBooking, id }) => {
 
     handleUpdateBooking,
     handleCreateBooking,
+
+    availableTables,
   } = useContext(GlobalContext);
   const [formData, setFormData] = useState(
     editBooking || {
@@ -48,7 +49,7 @@ const BookingForm = ({ editBooking, id }) => {
           two: availableTables,
         };
 
-        if (Number(booking.id) !== +id) {
+        if (Number(booking.id) !== +bookingId) {
           Number(booking.time) === 1
             ? (bookedSittings[booking.date].one -= 1)
             : (bookedSittings[booking.date].two -= 1);
@@ -61,7 +62,7 @@ const BookingForm = ({ editBooking, id }) => {
       setSittings(bookedSittings);
     };
     checkActiveSittings();
-  }, [bookings, id]);
+  }, [bookings, bookingId, availableTables]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -80,7 +81,7 @@ const BookingForm = ({ editBooking, id }) => {
     setIsLoading(true);
 
     if (editBooking) {
-      handleUpdateBooking(id, formData);
+      handleUpdateBooking(bookingId, formData);
     } else {
       handleCreateBooking(formData, setFormData);
     }

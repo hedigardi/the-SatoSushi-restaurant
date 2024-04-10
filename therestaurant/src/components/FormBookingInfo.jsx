@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import GlobalContext from '../context/GlobalContext';
 import bookableDates from '../utils/bookableDates';
-import { formValidationMessages } from '../utils/restaurant.config';
 
 const FormBookingInfo = ({ handleChange, formData, sittings }) => {
+  const { formValidationMessages } = useContext(GlobalContext);
+
   const [sittingOne, setSittingOne] = useState(true);
   const [sittingTwo, setSittingTwo] = useState(true);
 
@@ -33,7 +35,7 @@ const FormBookingInfo = ({ handleChange, formData, sittings }) => {
     validateActiveSittings(formData.date);
   });
 
-  const customValidityOnChange = (input, text) => {
+  const setCustomValidityOnChange = (input, text) => {
     if (!input.value.trim()) {
       input.setCustomValidity(text);
     } else {
@@ -52,7 +54,7 @@ const FormBookingInfo = ({ handleChange, formData, sittings }) => {
 
             const input = e.target;
             validateActiveSittings(input.value);
-            customValidityOnChange(input, formValidationMessages.date);
+            setCustomValidityOnChange(input, formValidationMessages.date);
           }}
           value={formData.date}
           required
@@ -89,7 +91,7 @@ const FormBookingInfo = ({ handleChange, formData, sittings }) => {
           name="time"
           onChange={(e) => {
             handleChange(e);
-            customValidityOnChange(e.target, formValidationMessages.time);
+            setCustomValidityOnChange(e.target, formValidationMessages.time);
           }}
           value={formData.time}
           required
@@ -119,7 +121,9 @@ const FormBookingInfo = ({ handleChange, formData, sittings }) => {
           onChange={handleChange}
           value={formData.numberOfGuests}
           required
-          onInvalid={(e) => e.target.setCustomValidity('Välj antal personer')}
+          onInvalid={(e) =>
+            e.target.setCustomValidity(formValidationMessages.guests)
+          }
           onInput={(e) => e.target.setCustomValidity('')}
         >
           <option value="">-- Välj antal gäster --</option>

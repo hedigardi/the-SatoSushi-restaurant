@@ -1,4 +1,9 @@
+import { useContext } from 'react';
+import GlobalContext from '../context/GlobalContext';
+
 const FormGuestInfo = ({ handleChange, formData }) => {
+  const { formValidationMessages } = useContext(GlobalContext);
+
   return (
     <div>
       <label>
@@ -11,7 +16,9 @@ const FormGuestInfo = ({ handleChange, formData }) => {
           onChange={handleChange}
           value={formData.name.name}
           required
-          onInvalid={(e) => e.target.setCustomValidity('Fyll in ditt namn')}
+          onInvalid={(e) =>
+            e.target.setCustomValidity(formValidationMessages.name)
+          }
           onInput={(e) => e.target.setCustomValidity('')}
         />
       </label>
@@ -27,7 +34,9 @@ const FormGuestInfo = ({ handleChange, formData }) => {
           onChange={handleChange}
           value={formData.name.email}
           required
-          onInvalid={(e) => e.target.setCustomValidity('Fyll in din e-mail')}
+          onInvalid={(e) =>
+            e.target.setCustomValidity(formValidationMessages.email)
+          }
           onInput={(e) => e.target.setCustomValidity('')}
         />
       </label>
@@ -44,7 +53,7 @@ const FormGuestInfo = ({ handleChange, formData }) => {
           value={formData.name.tel}
           required
           onInvalid={(e) =>
-            e.target.setCustomValidity('Fyll in ditt telefonnummer')
+            e.target.setCustomValidity(formValidationMessages.tel)
           }
           onInput={(e) => e.target.setCustomValidity('')}
         />

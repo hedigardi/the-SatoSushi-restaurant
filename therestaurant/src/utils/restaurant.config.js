@@ -4,10 +4,10 @@ export const formValidationMessages = {
   booked: 'Fullbokat',
   date: 'Välj ett giltigt datum',
   time: 'Välj en giltigt tid',
-  guests: '',
-  name: '',
-  email: '',
-  tel: '',
+  guests: 'Välj antal personer',
+  name: 'Fyll in ditt namn',
+  email: 'Fyll in din e-mail',
+  tel: 'Fyll in ditt telefonnummer',
   gdpr: '',
 };
 

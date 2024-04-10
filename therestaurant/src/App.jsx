@@ -10,6 +10,11 @@ import {
   deleteBooking,
   updateBooking,
 } from './services/bookingService.js';
+import {
+  availableTables,
+  formValidationMessages,
+  menuList,
+} from './utils/restaurant.config.js';
 import GlobalContext from './context/GlobalContext.js';
 import './App.css';
 
@@ -137,6 +142,10 @@ function App() {
           handleCreateBooking,
           handleDeleteBooking,
           handleUpdateBooking,
+
+          availableTables,
+          formValidationMessages,
+          menuList,
         }}
       >
         <RouterProvider router={router} />
