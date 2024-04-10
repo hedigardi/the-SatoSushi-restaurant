@@ -2,46 +2,50 @@ const ContactForm = () => {
   return (
     <section>
       <header>
-        <h2>Contact Form</h2>
+        <h2>Kontaktformulär</h2>
       </header>
+      <div className="booking-admin">
+        <form>
+          <div className="label-input">
+            <label htmlFor="name">
+              Namn:
+              <input
+                type="text"
+                name="name"
+                placeholder="Ange namn"
+                required
+              />
+            </label>
+          </div>
 
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-        }}
-      >
-        <div>
-          <label htmlFor="name">Name:</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            required
-          />
-        </div>
+          <div className="label-input">
+            <label htmlFor="email">
+              E-post:
+              <input
+                type="email"
+                name="email"
+                placeholder="Ange e-post adress"
+                required
+              />
+            </label>
+          </div>
 
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            required
-          />
-        </div>
+          <div className="label-input">
+            <label htmlFor="message">
+              Meddelande:
+              <textarea
+                id="message"
+                name="message"
+                placeholder="Skriv ditt meddelande här..."
+                rows="4"
+                required
+              ></textarea>
+            </label>
+          </div>
 
-        <div>
-          <label htmlFor="message">Message:</label>
-          <textarea
-            id="message"
-            name="message"
-            rows="4"
-            required
-          ></textarea>
-        </div>
-
-        <button type="submit">Send</button>
-      </form>
+          <button type="submit">Skicka</button>
+        </form>
+      </div>
     </section>
   );
 };

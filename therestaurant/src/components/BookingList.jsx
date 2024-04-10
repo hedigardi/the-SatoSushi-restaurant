@@ -6,7 +6,7 @@ const BookingList = () => {
   const { bookings, handleDeleteBooking } = useContext(GlobalContext);
 
   return (
-    <ul>
+    <ul className="booking-ul">
       {bookings.map((booking) => {
         let { id, numberOfGuests: guests, name: person, date, time } = booking;
         id = Number(id);
@@ -15,36 +15,65 @@ const BookingList = () => {
         time = Number(time);
 
         return (
-          <li key={id}>
-            <span>Guests: {guests}</span>
-            <br />
+          <li
+            key={id}
+            className="booking-admin"
+          >
+            <div key={id}>
+              <div className="admin-wrapper">
+                <span className="admin-text admin-break-word">
+                  Antal Gäster:{' '}
+                </span>
+                <span className="admin-separator"></span>
+                <span className="admin-break-word">{guests}</span>
+              </div>
 
-            <span>Name: {person.name}</span>
-            <br />
+              <div className="admin-wrapper">
+                <span className="admin-text">Namn: </span>
+                <span className="admin-separator"></span>
+                <span className="admin-break-word">{person.name}</span>
+              </div>
 
-            <span>E-mail: {person.email}</span>
-            <br />
+              <div className="admin-wrapper">
+                <span className="admin-text admin-break-word">E-post: </span>
+                <span className="admin-separator"></span>
+                <span className="admin-break-word">{person.email}</span>
+              </div>
 
-            <span>Tel: {person.tel}</span>
-            <br />
+              <div className="admin-wrapper">
+                <span className="admin-text admin-break-word">Telefon: </span>
+                <span className="admin-separator"></span>
+                <span className="admin-break-word">{person.tel}</span>
+              </div>
 
-            <span>Date: {date}</span>
-            <br />
+              <div className="admin-wrapper">
+                <span className="admin-text admin-break-word">Datum: </span>
+                <span className="admin-separator"></span>
+                <span className="admin-break-word">{date}</span>
+              </div>
 
-            <span>Time: {time === 1 ? '18:00 - 20:00' : '21:00 - 23:00'}</span>
-            <br />
+              <div className="admin-wrapper">
+                <span className="admin-text admin-break-word">
+                  Tid/Sittning:{' '}
+                </span>
+                <span className="admin-separator"></span>
+                <span className="admin-break-word">
+                  {time === 1 ? '18:00-20:00' : '21:00-23:00'}
+                </span>
+              </div>
 
-            <Link to={'/admin/' + id}>
-              <button>Edit</button>
-            </Link>
+              <Link to={'/admin/' + id}>
+                <button>Redigera</button>
+              </Link>
 
-            <button
-              onClick={() => {
-                handleDeleteBooking(id);
-              }}
-            >
-              Remove
-            </button>
+              <button
+                onClick={() => {
+                  handleDeleteBooking(id);
+                }}
+              >
+                Tabort
+              </button>
+            </div>
           </li>
         );
       })}

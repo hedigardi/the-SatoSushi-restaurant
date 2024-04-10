@@ -5,23 +5,15 @@ const ContactPage = () => {
     <div>
       <section>
         <header>
-          <h2>Contact Information</h2>
+          <h2>Kontaktuppgifter</h2>
         </header>
 
-        <p>Address: Sushigatan 1</p>
-        <p>Phone: +46 (0) 12 34 56 789</p>
-        <p>Email: info@satosushi.com</p>
+        <p>Adress: Sushigatan 1</p>
+        <p>Telefon: +46 (0) 12 34 56 789</p>
+        <p>E-post: info@satosushi.com</p>
       </section>
 
       <ContactForm />
-
-      <section>
-        <header>
-          <h2>FAQ</h2>
-        </header>
-
-        <p>Here you can find frequently asked questions.</p>
-      </section>
     </div>
   );
 };

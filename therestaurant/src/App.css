@@ -1,5 +1,6 @@
 #root {
   max-width: 1280px;
+  overflow: hidden;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
@@ -543,10 +544,26 @@ input[type='radio'] {
   border: 1px solid #323232;
 }
 
+/* .admin-wrapper {
+  display: flex;
+  justify-content: space-between;
+} */
+
 .admin-text {
   color: var(--fourth-color);
   font-weight: bold;
 }
+
+.admin-break-word {
+  word-wrap: break-word;
+}
+
+/* .admin-separator {
+  display: inline-block;
+  width: 100%;
+  margin: 0.35rem;
+  border-bottom: 3px dotted var(--fourth-color);
+} */
 
 .validation-message {
   color: var(--primary-color);
