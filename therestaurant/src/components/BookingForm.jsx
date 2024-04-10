@@ -6,7 +6,7 @@ import FormBookingInfo from './FormBookingInfo';
 import FormGuestInfo from './FormGuestInfo';
 import Gdpr from './Gdpr';
 
-const BookingForm = ({ booking, id }) => {
+const BookingForm = ({ editBooking, id }) => {
   const {
     bookings,
     bookingMessage,
@@ -20,7 +20,7 @@ const BookingForm = ({ booking, id }) => {
     handleCreateBooking,
   } = useContext(GlobalContext);
   const [formData, setFormData] = useState(
-    booking || {
+    editBooking || {
       numberOfGuests: '',
       name: { name: '', email: '', tel: '' },
       date: '',
@@ -31,8 +31,6 @@ const BookingForm = ({ booking, id }) => {
   const locationPath = useLocation().pathname;
 
   useEffect(() => {
-    console.log('message');
-
     const timer = setTimeout(() => {
       setBookingMessage('');
     }, 5000);
@@ -50,9 +48,11 @@ const BookingForm = ({ booking, id }) => {
           two: availableTables,
         };
 
-        Number(booking.time) === 1
-          ? (bookedSittings[booking.date].one -= 1)
-          : (bookedSittings[booking.date].two -= 1);
+        if (Number(booking.id) !== +id) {
+          Number(booking.time) === 1
+            ? (bookedSittings[booking.date].one -= 1)
+            : (bookedSittings[booking.date].two -= 1);
+        }
 
         bookedSittings[booking.date].total =
           bookedSittings[booking.date].one + bookedSittings[booking.date].two;
@@ -61,7 +61,7 @@ const BookingForm = ({ booking, id }) => {
       setSittings(bookedSittings);
     };
     checkSittings();
-  }, [bookings]);
+  }, [bookings, id]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -79,7 +79,7 @@ const BookingForm = ({ booking, id }) => {
     e.preventDefault();
     setIsLoading(true);
 
-    if (booking) {
+    if (editBooking) {
       handleUpdateBooking(id, formData);
     } else {
       handleCreateBooking(formData, setFormData);
@@ -106,7 +106,7 @@ const BookingForm = ({ booking, id }) => {
           />
 
           <div>
-            {booking ? (
+            {editBooking ? (
               <button type="submit">Updatera</button>
             ) : (
               <>

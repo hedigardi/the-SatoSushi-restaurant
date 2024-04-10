@@ -13,13 +13,13 @@ import {
 import GlobalContext from './context/GlobalContext.js';
 import './App.css';
 
-if (window.ethereum) {
+const web3Provider = window.ethereum;
+
+if (web3Provider) {
   await createRestaurant('Sato Sushi');
 }
 
 function App() {
-  const [metamask, setMetamask] = useState(window.ethereum);
-
   const [bookings, setBookings] = useState([]);
   const [bookingMessage, setBookingMessage] = useState('');
 
@@ -27,16 +27,8 @@ function App() {
   const [isLoadingForm, setIsLoadingForm] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const [readContract, setReadContract] = useState({
-    getAllBookings,
-    getBooking,
-    getBookingCount,
-  });
-  const [writeContract, setWriteContract] = useState({
-    createBooking,
-    deleteBooking,
-    updateBooking,
-  });
+  const [readContract, setReadContract] = useState();
+  const [writeContract, setWriteContract] = useState();
 
   useEffect(() => {
     if (bookings.length > 0) return;
@@ -55,6 +47,25 @@ function App() {
       console.error('Error fetching all bookings:', error);
     }
   }, [readContract]);
+
+  useEffect(() => {
+    const setupProviders = async () => {
+      if (web3Provider) {
+        setReadContract({
+          getAllBookings,
+          getBooking,
+          getBookingCount,
+        });
+
+        setWriteContract({
+          createBooking,
+          deleteBooking,
+          updateBooking,
+        });
+      }
+    };
+    setupProviders();
+  }, []);
 
   useEffect(() => {
     if (readContract) {
@@ -110,7 +121,7 @@ function App() {
 
   return (
     <>
-      {!metamask && (
+      {!web3Provider && (
         <div>
           <p>Du saknar METAMASK!</p>
         </div>

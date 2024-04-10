@@ -1,15 +1,13 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import bookableDates from '../utils/bookableDates';
 
 const FormBookingInfo = ({ handleChange, formData, sittings }) => {
   const [sittingOne, setSittingOne] = useState(true);
   const [sittingTwo, setSittingTwo] = useState(true);
-  const [validDate, setValidDate] = useState(null);
 
   const checkDate = (date) => {
     setSittingOne(true);
     setSittingTwo(true);
-    setValidDate(null);
 
     if (date) {
       console.log(date);
@@ -21,10 +19,6 @@ const FormBookingInfo = ({ handleChange, formData, sittings }) => {
         currentSittings.one > 0 ? setSittingOne(true) : setSittingOne(false);
 
         currentSittings.two > 0 ? setSittingTwo(true) : setSittingTwo(false);
-
-        currentSittings.one <= 0 && currentSittings.two <= 0
-          ? setValidDate('Detta datumet är full bokat!')
-          : setValidDate(null);
       } else {
         console.log('no booking');
       }
@@ -33,9 +27,13 @@ const FormBookingInfo = ({ handleChange, formData, sittings }) => {
     }
   };
 
+  useEffect(() => {
+    if (!formData.date) return;
+    checkDate(formData.date);
+  });
+
   return (
     <div>
-      <p>{validDate && validDate}</p>
       <label>
         Datum:{' '}
         <select

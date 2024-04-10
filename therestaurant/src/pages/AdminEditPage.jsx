@@ -38,7 +38,7 @@ const AdminEditPage = () => {
 
       {editBooking ? (
         <BookingForm
-          booking={editBooking}
+          editBooking={editBooking}
           id={bookingId}
         />
       ) : (
