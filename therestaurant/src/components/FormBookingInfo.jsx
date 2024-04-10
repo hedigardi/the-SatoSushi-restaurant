@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import bookableDates from '../utils/bookableDates';
+import { formValidationMessages } from '../utils/restaurant.config';
 
 const FormBookingInfo = ({ handleChange, formData, sittings }) => {
   const [sittingOne, setSittingOne] = useState(true);
@@ -32,6 +33,14 @@ const FormBookingInfo = ({ handleChange, formData, sittings }) => {
     validateActiveSittings(formData.date);
   });
 
+  const customValidityOnChange = (input, text) => {
+    if (!input.value.trim()) {
+      input.setCustomValidity(text);
+    } else {
+      input.setCustomValidity('');
+    }
+  };
+
   return (
     <div>
       <label>
@@ -40,14 +49,16 @@ const FormBookingInfo = ({ handleChange, formData, sittings }) => {
           name="date"
           onChange={(e) => {
             handleChange(e);
-            validateActiveSittings(e.target.value);
+
+            const input = e.target;
+            validateActiveSittings(input.value);
+            customValidityOnChange(input, formValidationMessages.date);
           }}
           value={formData.date}
           required
           onInvalid={(e) =>
-            e.target.setCustomValidity('Välj ett giltigt datum')
+            e.target.setCustomValidity(formValidationMessages.date)
           }
-          onInput={(e) => e.target.setCustomValidity('')}
         >
           <option value="">-- Välj ett datum --</option>
           {bookableDates().map((date, index) => (
@@ -65,7 +76,7 @@ const FormBookingInfo = ({ handleChange, formData, sittings }) => {
               {sittings[date] &&
                 sittings[date].one <= 0 &&
                 sittings[date].two <= 0 &&
-                ' (Full bokat)'}
+                ` (${formValidationMessages.booked})`}
             </option>
           ))}
         </select>
@@ -76,24 +87,26 @@ const FormBookingInfo = ({ handleChange, formData, sittings }) => {
         Tid/Sittning:{' '}
         <select
           name="time"
-          onChange={handleChange}
+          onChange={(e) => {
+            handleChange(e);
+            customValidityOnChange(e.target, formValidationMessages.time);
+          }}
           value={formData.time}
           required
-          onInvalid={(e) => e.target.setCustomValidity('Välj en giltigt tid')}
-          onInput={(e) => e.target.setCustomValidity('')}
+          onInvalid={(e) =>
+            e.target.setCustomValidity(formValidationMessages.time)
+          }
         >
-          <option value="">
-            {!sittingOne && !sittingTwo
-              ? '-- Full bokat --'
-              : '-- Välj en sittning --'}
-          </option>
+          <option value="">-- Välj en sittning --</option>
 
           <option value={sittingOne ? 1 : ''}>
-            Sitting 1 ({sittingOne ? 'Kl. 18:00 - 20:00' : 'Full bokat'})
+            Sitting 1 (
+            {sittingOne ? 'Kl. 18:00 - 20:00' : formValidationMessages.booked})
           </option>
 
           <option value={sittingTwo ? 2 : ''}>
-            Sitting 2 ({sittingTwo ? 'Kl. 21:00 - 23:00' : 'Full bokat'})
+            Sitting 2 (
+            {sittingTwo ? 'Kl. 21:00 - 23:00' : formValidationMessages.booked})
           </option>
         </select>
       </label>

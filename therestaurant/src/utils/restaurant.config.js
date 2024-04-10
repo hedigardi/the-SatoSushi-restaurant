@@ -1,5 +1,16 @@
 export const availableTables = 1;
 
+export const formValidationMessages = {
+  booked: 'Fullbokat',
+  date: 'Välj ett giltigt datum',
+  time: 'Välj en giltigt tid',
+  guests: '',
+  name: '',
+  email: '',
+  tel: '',
+  gdpr: '',
+};
+
 export const menuList = [
   {
     categoryName: 'Maki',
