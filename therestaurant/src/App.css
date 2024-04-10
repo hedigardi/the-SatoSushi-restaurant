@@ -35,11 +35,6 @@ body {
   min-height: 100vh;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
 button {
   --transition-time: 0.5s;
   border-radius: 8px;
@@ -64,6 +59,7 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+h1,
 h2 {
   font-family: 'Playfair Display', serif;
   font-size: 2.5rem;
@@ -93,7 +89,7 @@ ul li {
   text-align: center;
 }
 
-.about_us {
+.about-us {
   font-family: 'Open Sans', sans-serif;
   font-size: 1.1rem;
   line-height: 1.5;
@@ -197,7 +193,7 @@ footer ul li a {
   color: var(--primary-color);
 }
 
-p.about_us {
+p.about-us {
   margin: 3%;
   color: var(--secondary-color);
   font-size: 1.3rem;
