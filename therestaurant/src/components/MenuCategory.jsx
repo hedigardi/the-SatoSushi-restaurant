@@ -2,7 +2,7 @@ import MenuItem from './MenuItem';
 
 const MenuCategory = ({ menuList }) => {
   return (
-    <section>
+    <section className="category-wrapper">
       <header>
         <h3>{menuList.categoryName}</h3>
       </header>

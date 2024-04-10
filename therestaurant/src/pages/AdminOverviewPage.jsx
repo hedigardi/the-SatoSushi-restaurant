@@ -1,24 +1,27 @@
 import { useContext } from 'react';
-import AdminContext from '../context/AdminContext';
 import BookingList from '../components/BookingList';
 import { Link } from 'react-router-dom';
+import GlobalContext from '../context/GlobalContext';
 
 const AdminOverviewPage = () => {
-  const [bookings, handleDeleteBooking, isLoadingBookings] =
-    useContext(AdminContext);
+  const { isLoadingBookings } = useContext(GlobalContext);
 
   return (
-    <div>
-      <Link to={'/admin/create'}>
-        <button>Skapa ny bokning</button>
-      </Link>
+    <>
+      {isLoadingBookings ? (
+        <div className="center-content">
+          <div className="loading-spinner big-spinner"></div>
+        </div>
+      ) : (
+        <div>
+          <Link to={'/admin/create'}>
+            <button>Skapa ny bokning</button>
+          </Link>
 
-      <BookingList
-        bookings={bookings}
-        handleDeleteBooking={handleDeleteBooking}
-        isLoadingBookings={isLoadingBookings}
-      />
-    </div>
+          <BookingList />
+        </div>
+      )}
+    </>
   );
 };
 

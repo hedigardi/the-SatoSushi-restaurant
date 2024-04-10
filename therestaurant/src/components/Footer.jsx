@@ -5,14 +5,15 @@ const Footer = () => {
     <footer>
       <ul>
         <li>
-          <Link to={'/about'}>Villkor och Avtal</Link>
+          <Link to={'/about'}>Villkor</Link>
+        </li>
+        <li>
+          <Link to={'/contact'}>Kontakt</Link>
+        </li>
+        <li>
+          <Link>&copy; 2024 SatoSushi</Link>
         </li>
       </ul>
-
-      <div>
-        <p>&copy; 2024 SatoSushi. All rights reserved.</p>
-        <p>Contact us at info@satosushi.com</p>
-      </div>
     </footer>
   );
 };

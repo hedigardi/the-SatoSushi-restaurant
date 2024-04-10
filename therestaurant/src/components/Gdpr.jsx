@@ -1,4 +1,9 @@
+import { useContext } from 'react';
+import GlobalContext from '../context/GlobalContext';
+
 const Gdpr = () => {
+  const { formValidationMessages } = useContext(GlobalContext);
+
   return (
     <div>
       <span>
@@ -6,7 +11,7 @@ const Gdpr = () => {
           type="checkbox"
           required
           onInvalid={(e) =>
-            e.target.setCustomValidity('Godkänn till GDPR för att fortsätta')
+            e.target.setCustomValidity(formValidationMessages.gdpr)
           }
           onInput={(e) => e.target.setCustomValidity('')}
         />

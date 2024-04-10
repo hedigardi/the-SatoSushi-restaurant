@@ -1,51 +1,69 @@
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import GlobalContext from '../context/GlobalContext';
 
-const BookingList = ({ bookings, handleDeleteBooking, isLoadingBookings }) => {
+const BookingList = () => {
+  const { bookings, handleDeleteBooking } = useContext(GlobalContext);
+
   return (
-    <>
-      <div className="center-content">
-        {isLoadingBookings && (
-          <div className="loading-spinner big-spinner"></div>
-        )}
-      </div>
-      <ul>
-        {bookings.map((booking) => {
-          let {
-            id,
-            numberOfGuests: guests,
-            name: person,
-            date,
-            time,
-          } = booking;
-          id = Number(id);
-          guests = Number(guests);
-          person = JSON.parse(person);
-          time = Number(time);
+    <ul className="booking-ul">
+      {bookings.map((booking) => {
+        let { id, numberOfGuests: guests, name: person, date, time } = booking;
+        id = Number(id);
+        guests = Number(guests);
+        person = JSON.parse(person);
+        time = Number(time);
 
-          return (
-            <li key={id}>
-              <span>Guests: {guests}</span>
-              <br />
+        return (
+          <li
+            key={id}
+            className="booking-admin"
+          >
+            <div key={id}>
+              <div className="admin-wrapper">
+                <span className="admin-text admin-break-word">
+                  Antal Gäster:{' '}
+                </span>
+                <span className="admin-separator"></span>
+                <span className="admin-break-word">{guests}</span>
+              </div>
 
-              <span>Name: {person.name}</span>
-              <br />
+              <div className="admin-wrapper">
+                <span className="admin-text">Namn: </span>
+                <span className="admin-separator"></span>
+                <span className="admin-break-word">{person.name}</span>
+              </div>
 
-              <span>E-mail: {person.email}</span>
-              <br />
+              <div className="admin-wrapper">
+                <span className="admin-text admin-break-word">E-post: </span>
+                <span className="admin-separator"></span>
+                <span className="admin-break-word">{person.email}</span>
+              </div>
 
-              <span>Tel: {person.tel}</span>
-              <br />
+              <div className="admin-wrapper">
+                <span className="admin-text admin-break-word">Telefon: </span>
+                <span className="admin-separator"></span>
+                <span className="admin-break-word">{person.tel}</span>
+              </div>
 
-              <span>Date: {date}</span>
-              <br />
+              <div className="admin-wrapper">
+                <span className="admin-text admin-break-word">Datum: </span>
+                <span className="admin-separator"></span>
+                <span className="admin-break-word">{date}</span>
+              </div>
 
-              <span>
-                Time: {time === 1 ? '18:00 - 20:00' : '21:00 - 23:00'}
-              </span>
-              <br />
+              <div className="admin-wrapper">
+                <span className="admin-text admin-break-word">
+                  Tid/Sittning:{' '}
+                </span>
+                <span className="admin-separator"></span>
+                <span className="admin-break-word">
+                  {time === 1 ? '18:00-20:00' : '21:00-23:00'}
+                </span>
+              </div>
 
               <Link to={'/admin/' + id}>
-                <button>Edit</button>
+                <button>Redigera</button>
               </Link>
 
               <button
@@ -53,13 +71,13 @@ const BookingList = ({ bookings, handleDeleteBooking, isLoadingBookings }) => {
                   handleDeleteBooking(id);
                 }}
               >
-                Remove
+                Tabort
               </button>
-            </li>
-          );
-        })}
-      </ul>
-    </>
+            </div>
+          </li>
+        );
+      })}
+    </ul>
   );
 };
 
