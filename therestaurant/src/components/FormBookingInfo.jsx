@@ -5,22 +5,22 @@ const FormBookingInfo = ({ handleChange, formData, sittings }) => {
   const [sittingOne, setSittingOne] = useState(true);
   const [sittingTwo, setSittingTwo] = useState(true);
 
-  const checkDate = (date) => {
+  const validateActiveSittings = (date) => {
     setSittingOne(true);
     setSittingTwo(true);
 
     if (date) {
-      console.log(date);
+      console.info(date);
       const currentSittings = sittings[date];
 
       if (currentSittings) {
-        console.log(currentSittings);
+        console.info(currentSittings);
 
         currentSittings.one > 0 ? setSittingOne(true) : setSittingOne(false);
 
         currentSittings.two > 0 ? setSittingTwo(true) : setSittingTwo(false);
       } else {
-        console.log('no booking');
+        console.info('no booking');
       }
     } else {
       console.warn('no date');
@@ -29,7 +29,7 @@ const FormBookingInfo = ({ handleChange, formData, sittings }) => {
 
   useEffect(() => {
     if (!formData.date) return;
-    checkDate(formData.date);
+    validateActiveSittings(formData.date);
   });
 
   return (
@@ -40,7 +40,7 @@ const FormBookingInfo = ({ handleChange, formData, sittings }) => {
           name="date"
           onChange={(e) => {
             handleChange(e);
-            checkDate(e.target.value);
+            validateActiveSittings(e.target.value);
           }}
           value={formData.date}
           required

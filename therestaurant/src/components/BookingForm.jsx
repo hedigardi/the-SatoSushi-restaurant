@@ -14,7 +14,7 @@ const BookingForm = ({ editBooking, id }) => {
 
     isLoading,
     setIsLoading,
-    isLoadingForm,
+    isLoadingBookings,
 
     handleUpdateBooking,
     handleCreateBooking,
@@ -39,7 +39,7 @@ const BookingForm = ({ editBooking, id }) => {
   }, [bookingMessage, setBookingMessage]);
 
   useEffect(() => {
-    const checkSittings = async () => {
+    const checkActiveSittings = async () => {
       const bookedSittings = {};
 
       bookings.forEach((booking) => {
@@ -60,7 +60,7 @@ const BookingForm = ({ editBooking, id }) => {
 
       setSittings(bookedSittings);
     };
-    checkSittings();
+    checkActiveSittings();
   }, [bookings, id]);
 
   const handleChange = (e) => {
@@ -88,7 +88,7 @@ const BookingForm = ({ editBooking, id }) => {
 
   return (
     <>
-      {isLoadingForm ? (
+      {isLoadingBookings ? (
         <div className="center-content">
           <div className="loading-spinner big-spinner"></div>
         </div>

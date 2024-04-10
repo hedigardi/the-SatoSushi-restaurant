@@ -9,10 +9,13 @@ let restaurantId = 0;
 if (window.ethereum) {
   provider = new ethers.BrowserProvider(window.ethereum);
   readContract = new ethers.Contract(contractAddress, abi, provider);
+
   const signer = await provider.getSigner();
   writeContract = new ethers.Contract(contractAddress, abi, signer);
+
+  console.info(`Ethers.js: Web3 provider was found!`);
 } else {
-  console.error(
+  console.warn(
     'Ethers.js: Web3 provider not found. Please install a wallet with Web3 support.'
   );
 }
@@ -51,12 +54,11 @@ export const createRestaurant = async (name) => {
 
     setRestaurantId(await getAll(input[0], await input[1]()), name);
 
-    console.log(`Restaurant "${name}" has been created`);
+    console.info(`Restaurant "${name}" has been created`);
   } else {
-    console.log('Restaurant already exists');
+    console.info('Restaurant already exists');
   }
 
-  console.log('current:', restaurantId);
   return restaurantId;
 };
 
@@ -74,7 +76,6 @@ export const getBooking = async (id) => {
 };
 
 export const createBooking = async (newBooking) => {
-  console.log('create:', restaurantId);
   return await writeContract.createBooking(
     newBooking.numberOfGuests,
     JSON.stringify(newBooking.name),

@@ -24,7 +24,6 @@ function App() {
   const [bookingMessage, setBookingMessage] = useState('');
 
   const [isLoadingBookings, setIsLoadingBookings] = useState(false);
-  const [isLoadingForm, setIsLoadingForm] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const [readContract, setReadContract] = useState();
@@ -33,16 +32,13 @@ function App() {
   useEffect(() => {
     if (bookings.length > 0) return;
     setIsLoadingBookings(true);
-    setIsLoadingForm(true);
   }, [bookings]);
 
   const fetchBookings = useCallback(async () => {
     try {
       const result = await readContract.getAllBookings();
       setBookings(result);
-
       setIsLoadingBookings(false);
-      setIsLoadingForm(false);
     } catch (error) {
       console.error('Error fetching all bookings:', error);
     }
@@ -88,7 +84,7 @@ function App() {
       setBookingMessage('Tack! Din bokning är skapad!');
       fetchBookings();
     } catch (error) {
-      console.error('Fel vid skapande av bokning:', error);
+      console.error('Error creating a booking:', error);
     } finally {
       setIsLoading(false);
     }
@@ -101,7 +97,7 @@ function App() {
 
       fetchBookings();
     } catch (error) {
-      console.error('Error deleting booking:', error);
+      console.error(`Error deleting booking with ${id}:`, error);
     }
   };
 
@@ -113,7 +109,7 @@ function App() {
       setBookingMessage('Updatering av bokning genomfört!');
       fetchBookings();
     } catch (error) {
-      console.error('Fel vid updatering av bokning:', error);
+      console.error(`Error updating booking with ${id}:`, error);
     } finally {
       setIsLoading(false);
     }
@@ -137,8 +133,6 @@ function App() {
           setIsLoading,
           isLoadingBookings,
           setIsLoadingBookings,
-          isLoadingForm,
-          setIsLoadingForm,
 
           handleCreateBooking,
           handleDeleteBooking,
