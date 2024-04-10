@@ -1,6 +1,6 @@
 const MenuItem = ({ item }) => {
   return (
-    <section className="menu-card">
+    <section className="booking-admin">
       <header>
         <img
           className="dish-image"
