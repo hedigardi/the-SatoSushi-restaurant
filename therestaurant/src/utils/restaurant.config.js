@@ -1,4 +1,4 @@
-export const availableTables = 1;
+export const availableTables = 15;
 
 export const formValidationMessages = {
   booked: 'Fullbokat',

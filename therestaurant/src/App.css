@@ -5,17 +5,11 @@
   padding: 2rem;
   text-align: center;
   --primary-color: #c3415b;
-  /* Dark red */
   --secondary-color: #d1d8ca;
-  /* Light green */
   --terciary-color: #3d5a58;
-  /* Dark green */
   --fourth-color: #e05368;
-  /* Secondary pink */
   --fifth-color: darkseagreen;
-  /* Green price */
   --sixth-color: #33363a;
-  /* Silver gray */
 }
 
 a {
@@ -62,7 +56,6 @@ button:focus-visible {
 
 h1,
 h2 {
-  /* font-family: 'Playfair Display', serif; */
   font-size: min(2.5rem, 12vw);
   font-weight: bold;
   color: var(--secondary-color);
@@ -122,7 +115,6 @@ ul li {
   line-height: 1.5;
 }
 
-/* Colors */
 .card {
   background-color: black;
   border-radius: 8px;
@@ -164,12 +156,11 @@ ul li {
 }
 
 nav ul {
-  /* max-width: 380px; */
   display: flex;
   list-style: none;
   gap: 2rem;
   justify-content: center;
-  text-align: center;
+  text-transform: uppercase;
 }
 
 nav ul li {
@@ -382,13 +373,9 @@ section header h3 {
   align-items: center;
   list-style: none;
   position: absolute;
-  /* top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); */
 }
 
 .navigation-item {
-  /* margin: 10px; */
   text-wrap: nowrap;
 }
 
@@ -400,7 +387,6 @@ section header h3 {
   padding: 10px 20px;
   color: var(--secondary-color);
   text-decoration: none;
-  text-transform: uppercase;
   background-image: linear-gradient(
     90deg,
     transparent 0%,
@@ -488,7 +474,7 @@ section header h3 {
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
   .nav-container {
     display: none;
   }
@@ -600,8 +586,8 @@ input[type='radio'] {
 }
 
 .admin-wrapper {
-  display: flex;
-  justify-content: space-between;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .admin-text {
@@ -609,16 +595,8 @@ input[type='radio'] {
   font-weight: bold;
 }
 
-.admin-break-word {
+.admin-nowrap {
   text-wrap: nowrap;
-  /* word-wrap: break-word; */
-}
-
-.admin-separator {
-  display: inline-block;
-  width: 100%;
-  margin: 0.35rem;
-  border-bottom: 3px dotted var(--fourth-color);
 }
 
 .validation-message {

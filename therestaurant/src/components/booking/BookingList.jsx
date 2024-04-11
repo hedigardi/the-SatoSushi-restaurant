@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
-import GlobalContext from '../context/GlobalContext';
+import GlobalContext from '../../context/GlobalContext';
 
 const BookingList = () => {
   const { bookings, handleDeleteBooking } = useContext(GlobalContext);
@@ -21,43 +21,39 @@ const BookingList = () => {
           >
             <div key={id}>
               <div className="admin-wrapper">
-                <span className="admin-text admin-break-word">
-                  Antal Gäster:{' '}
-                </span>
+                <span className="admin-text admin-nowrap">Antal Gäster: </span>
                 <span className="admin-separator"></span>
-                <span className="admin-break-word">{guests}</span>
+                <span className="admin-nowrap">{guests}</span>
               </div>
 
               <div className="admin-wrapper">
                 <span className="admin-text">Namn: </span>
                 <span className="admin-separator"></span>
-                <span className="admin-break-word">{person.name}</span>
+                <span className="admin-nowrap">{person.name}</span>
               </div>
 
               <div className="admin-wrapper">
-                <span className="admin-text admin-break-word">E-post: </span>
+                <span className="admin-text admin-nowrap">E-post: </span>
                 <span className="admin-separator"></span>
-                <span className="admin-break-word">{person.email}</span>
+                <span className="admin-nowrap">{person.email}</span>
               </div>
 
               <div className="admin-wrapper">
-                <span className="admin-text admin-break-word">Telefon: </span>
+                <span className="admin-text admin-nowrap">Telefon: </span>
                 <span className="admin-separator"></span>
-                <span className="admin-break-word">{person.tel}</span>
+                <span className="admin-nowrap">{person.tel}</span>
               </div>
 
               <div className="admin-wrapper">
-                <span className="admin-text admin-break-word">Datum: </span>
+                <span className="admin-text admin-nowrap">Datum: </span>
                 <span className="admin-separator"></span>
-                <span className="admin-break-word">{date}</span>
+                <span className="admin-nowrap">{date}</span>
               </div>
 
               <div className="admin-wrapper">
-                <span className="admin-text admin-break-word">
-                  Tid/Sittning:{' '}
-                </span>
+                <span className="admin-text admin-nowrap">Tid/Sittning: </span>
                 <span className="admin-separator"></span>
-                <span className="admin-break-word">
+                <span className="admin-nowrap">
                   {time === 1 ? '18:00-20:00' : '21:00-23:00'}
                 </span>
               </div>

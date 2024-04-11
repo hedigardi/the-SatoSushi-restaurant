@@ -27,7 +27,7 @@ const Header = () => {
             className="navigation-checkbox"
             id="navi-toggle"
             checked={toggleMenu}
-            onClick={() => {
+            onChange={() => {
               setToggleMenu(!toggleMenu);
             }}
           />

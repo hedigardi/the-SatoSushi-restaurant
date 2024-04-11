@@ -12,17 +12,11 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   --primary-color: #c3415b;
-  /* Dark red */
   --secondary-color: #d1d8ca;
-  /* Light green */
   --terciary-color: #3d5a58;
-  /* Dark green */
   --fourth-color: #e05368;
-  /* Secondary pink */
   --fifth-color: darkseagreen;
-  /* Green price */
   --sixth-color: #33363a;
-  /* Silver gray */
 }
 
 *,

@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
-import GlobalContext from '../context/GlobalContext';
-import bookableDates from '../utils/bookableDates';
+import GlobalContext from '../../context/GlobalContext';
+import bookableDates from '../../utils/bookableDates';
 
 const FormBookingInfo = ({ handleChange, formData, sittings }) => {
   const { formValidationMessages } = useContext(GlobalContext);

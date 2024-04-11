@@ -16,6 +16,7 @@ import {
   menuList,
 } from './utils/restaurant.config.js';
 import GlobalContext from './context/GlobalContext.js';
+import ProviderMissing from './components/ProviderMissing.jsx';
 import './App.css';
 
 const web3Provider = window.ethereum;
@@ -51,7 +52,7 @@ function App() {
   }, [isLoadingBookings, readContract]);
 
   useEffect(() => {
-    const setupProviders = async () => {
+    const setupServices = async () => {
       if (web3Provider) {
         setReadContract({
           getAllBookings,
@@ -66,7 +67,7 @@ function App() {
         });
       }
     };
-    setupProviders();
+    setupServices();
   }, []);
 
   useEffect(() => {
@@ -142,42 +143,7 @@ function App() {
 
   return (
     <>
-      {!web3Provider && (
-        <section className="provider-missing">
-          <img
-            className="logo"
-            src="/src/assets/images/logo_transparent_light.png"
-            alt="SatoSuShi logo"
-          />
-
-          <header>
-            <h1>Hej och välkommen till SatoSuShi!</h1>
-          </header>
-
-          <p>
-            Din webbläsare saknar en Web3-leverantör som krävs för att använda
-            denna applikation. För att fortsätta, vänligen installera en
-            Web3-leverantör i din webbläsare.
-          </p>
-
-          <p>
-            Vi rekommenderar MetaMask för bästa användarupplevelse och
-            kompatibilitet med Web3-applikationer.
-          </p>
-
-          <p>
-            Besök{' '}
-            <a
-              href="https://metamask.io/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Metamask.io
-            </a>{' '}
-            för att ladda ner och installera MetaMask.
-          </p>
-        </section>
-      )}
+      {!web3Provider && <ProviderMissing />}
 
       <GlobalContext.Provider
         value={{
