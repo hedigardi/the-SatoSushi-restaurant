@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import GlobalContext from '../../context/GlobalContext';
-import BookingForm from '../../components/BookingForm';
+import BookingForm from '../../components/booking/BookingForm';
 
 const AdminEditPage = () => {
   const { fetchBooking } = useContext(GlobalContext);

@@ -1,7 +1,7 @@
 import { useContext } from 'react';
-import BookingList from '../../components/BookingList';
 import { Link } from 'react-router-dom';
 import GlobalContext from '../../context/GlobalContext';
+import BookingList from '../../components/booking/BookingList';
 
 const AdminOverviewPage = () => {
   const { isLoadingBookings } = useContext(GlobalContext);
