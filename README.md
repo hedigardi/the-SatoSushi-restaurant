@@ -1,7 +1,7 @@
 # SatoSushi Restaurant
 Welcome to SatoSushi Restaurant.
 
-<img src="https://github.com/hedigardi/westcoast-education/blob/main/content/images/website.jpg" alt="SatoSushi Restaurant Website" width="650px">
+<img src="https://github.com/hedigardi/the-SatoSushi-restaurant/blob/main/therestaurant/src/assets/images/website.jpg" alt="SatoSushi Restaurant Website" width="650px">
 
 ## Installation
 1. Clone the SatoSushi-restaurant repository:
